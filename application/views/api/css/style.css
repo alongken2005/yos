@@ -1,0 +1,48 @@
+* { margin: 0; padding: 0; }
+body { font-size: 12px; }
+ol, ul { list-style: none; }
+a { color: #415657; text-decoration: none; out-line: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: 0; }
+select { border-radius: 2px; border: 1px solid #e0dfdd; background: #FFF; }
+textarea { overflow: auto; vertical-align: top; color: #714a3a; border: 1px solid #e0dfdd;  box-shadow: inset 0 0 6px rgba(26,26,26,0.1); border-radius: 2px; padding: 3px; }
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; height: 0; line-height: 0; overflow: hidden; font-size: 0; }
+.clear10 { clear: both; height: 20px; overflow: hidden; font-size: 0; }
+.clearfix{ overflow: hidden; _zoom: 1; }
+
+/*输入框*/
+.input1 { width: 80px; height: 26px; line-height: 26px; background: #FFF; color: #714a3a; font-size: 14px; font-weight: bold; padding: 0 3px; border: 1px solid #E0DFDD; }
+.input2 { width: 180px; height: 24px; line-height: 24px; background: #FFF; color: #714a3a; padding: 0 3px; border: 1px solid #e0dfdd; box-shadow: inset 0 0 6px rgba(26,26,26,0.1); border-radius: 2px; }
+.input3 { width: 150px; height: 24px; line-height: 24px; padding: 0 3px; background: #FFF; border: 1px solid #DBDBDB; }
+.input4 { width: 100px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
+.input5 { width: 240px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
+.input6 { width: 320px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
+.input7 { width: 100px; height: 20px; line-height: 20px; background: #F7F7F7; border: 1px solid #DBDBDB; }
+
+/*按钮 */
+.org_search { width: 86px; height: 26px; border: none; cursor: pointer; background: url(../images/org_btn.png) no-repeat; float: right; }
+.org_search:hover { background: url(../images/org_btn.png) 0 -26px no-repeat; }
+.org_login { width: 86px; height: 26px; border: none; cursor: pointer; background: url(../images/org_btn.png) -86px 0 no-repeat; float: right; }
+.org_login:hover { background: url(../images/org_btn.png) -86px -26px no-repeat; }
+.submit { width: 64px; height: 25px; font-weight: 600; background-color: #D34231; border: 1px solid #B0281A; cursor: pointer; color: #FFF; border-radius: 2px; }
+
+.api_header { background: #2D2D2D; color: #FFF; height: 40px; line-height: 40px; margin-bottom: 20px; font-size: 18px; font-weight: 600; border-bottom: 1px solid #000; }
+.api_box { width: 1000px; margin: 0 auto; overflow: hidden; zoom: 1; }
+.menu {  float: left; border-top: 1px dotted #D4E2F1; }
+.menu li { font-size: 14px; width: 140px; padding: 7px 10px 7px 20px; border-bottom: 1px dotted #D4E2F1; border-left: 4px solid #FFF; }
+.menu .active { border-left: 4px solid #D34231; }
+.menu .active a { color: #D34231; font-weight: 600; }
+.menu .active a:hover { text-decoration: underline; }
+.module { float: right; width: 800px; }
+.module h4 { border-bottom: 1px solid #D4E2F1; background-color: #1F4E7C; padding: 6px 10px; color: #FFF; }
+.module .mod_info { padding: 5px 10px; }
+
+.api_table1 { width: 100%; margin-bottom: 25px; }
+.api_table1 th { background-color: #CDCDCD; padding: 8px 10px; font-size: 15px; color: #333; }
+.api_table1 td { padding: 5px 10px; border-top: 1px solid #FFF; background: #EEE; }
+.api_table1 .name { text-align: right; padding-right: 10px; width: 15%; font-weight: 600; }
+.api_table1 .title { font-weight: 600; }
+
+.top_line { border-top: 3px solid #D34231; }
