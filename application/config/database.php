@@ -48,12 +48,12 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'admin';
-$db['default']['database'] = 'agilebill';
-$db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = 'ab_';
+$db['default']['hostname'] = '58.221.47.226';
+$db['default']['username'] = 'cliuser';
+$db['default']['password'] = 'croad_jml';
+$db['default']['database'] = 'yos';
+$db['default']['dbdriver'] = 'mysqli';
+$db['default']['dbprefix'] = 'yos_';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;

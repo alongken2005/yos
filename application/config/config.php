@@ -1,10 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-//书本资源目录
-$config['book_file'] = 'content/books/';
-$config['magazine_file'] = 'content/magazine/';
-
 //基础url
-$config['base_url']	= 'http://www.croad.com/';
+$config['base_url']	= 'http://www.yos.com/';
 
 //当前皮肤主题
 define('THEME', 'default');
@@ -26,7 +22,7 @@ define('THEME_VIEW', $config['base_url'].APPPATH.'views/'.THEME.'/');
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'main.php';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
