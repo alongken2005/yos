@@ -20,9 +20,5 @@ class Reg extends CI_Controller {
 		$this->load->view(THEME.'/reg', $this->_data);
 	}
 
-	public function redirect() {
-		$redirect = get_cookie('redirect') ? get_cookie('redirect') : base_url('movie');
-		delete_cookie('redirect');
-		redirect($redirect);
-	}
+
 }
