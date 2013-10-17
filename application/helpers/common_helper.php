@@ -41,9 +41,9 @@ function createFolder($path) {
   * @param type $filename  文件前缀
   * @param type $cf  是否每天生成一个文件
   */
- function write_log($msg, $level='info', $filename = 'ci', $cf = true) {
+ function write_log($msg, $filename = 'ci', $cf = true) {
 	$fname = $cf == true ? $filename.date('-Y-m-d') : $filename;
-	$msg = $level.'-'.date('Y-m-d H:i:s'). ' --> '.$msg."\r\n";
+	$msg = date('Y-m-d H:i:s'). ' --> '.$msg."\r\n";
 	file_put_contents($_SERVER['DOCUMENT_ROOT'].'/logs/'.$fname.'.log', $msg, FILE_APPEND);
 }
 

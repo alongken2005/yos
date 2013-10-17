@@ -1,9 +1,9 @@
 <?php $this->load->view(THEME.'/header');?>
-<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/reg_login.css"/>
+<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/reg_login.css"/>
 
 <div class="reg_login_box">
 	<h1 class="png"></h1>
-	<form action="<?=site_url('user/login')?>" method="post" class="login_box">
+	<form action="<?=site_url('user/do_login')?>" method="post" class="login_box">
 		<h2 class="png"></h2>
 		<label>用户名/邮箱：</label>
 		<div class="input_box">
@@ -17,12 +17,12 @@
 		<label class="dan"><input type="checkbox" name=""/> 记住我的账户：</label>
 		<div class="input_box">
 			<input type="submit" value=" " class="login_submit png">
-			<input type="hidden" value="<?=site_url('reg/redirect')?>" class="direct_url">
+			<input type="hidden" value="<?=site_url('user/redirect')?>" class="direct_url">
 		</div>
 		<div class="clear"></div>
 		<div class="error"></div>
 	</form>
-	<form action="<?=site_url('user/register')?>" method="post" class="reg_box png">
+	<form action="<?=site_url('user/do_reg')?>" method="post" class="reg_box png">
 		<h2 class="png"></h2>
 		<label>登录邮箱：</label>
 		<div class="input_box">
@@ -40,18 +40,12 @@
 		</div>
 		<div class="input_box">
 			<input type="submit" value=" " class="reg_submit png">
-			<input type="hidden" value="<?=site_url('reg/redirect')?>" class="direct_url">
+			<input type="hidden" value="<?=site_url('user/redirect')?>" class="direct_url">
 		</div>
-		<div class="agree"><input type="checkbox" name="agree" value="1"/> 同意儿童之路相关条款及优秀内容推送</div>
+		<div class="agree"><input type="checkbox" name="agree" value="1"/> 同意YouShelf相关条款及优秀内容推送</div>
 		<div class="error"></div>
 	</form>
 </div>
-<!--[if IE 6]>
-<script type="text/javascript" src="<?=base_url('./common/js/fixpng-min.js')?>"></script>
-<script type="text/javascript">
-DD_belatedPNG.fix('.png');
-</script>
-<![endif]-->
 <script type="text/javascript">
 	$(function() {
 		$('.login_submit').click(function() {

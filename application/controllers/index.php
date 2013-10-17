@@ -5,7 +5,7 @@
  * @version 1.0.0 (Thu Feb 23 13:49:18 GMT 2012)
  * @author ZhangHao
  */
-class Index extends CI_Controller {
+class Index extends MY_Controller {
 
     public function __construct() {
 		parent::__construct();

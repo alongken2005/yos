@@ -6,6 +6,7 @@
  */
 
 class User extends CI_Controller {
+	private $_data;
 
 	public function __construct() {
 		parent::__construct();
@@ -18,11 +19,15 @@ class User extends CI_Controller {
 	public function index() {
 		$this->login();
 	}
+	
+	public function reg() {
+		$this->load->view(THEME.'/reg', $this->_data);
+	}
 
 	/**
 	 * 登录
 	 */
-	public function login() {
+	public function do_login() {
 		$username		= $this->input->post('username');
 		$password		= $this->input->post('password');
 		$md5password	= md5($password);
@@ -31,14 +36,14 @@ class User extends CI_Controller {
 			output(2101, '用户名或密码为空');			//用户名或密码为空
 		}
 
-		$user = $this->base->get_data('account', array('username'=>$username), 'id,status,username,password')->row_array();
+		$user = $this->base->get_data('account', array('email'=>$username), 'uid,status,email,password')->row_array();
 
 		if($user) {
 			if($user['password'] != $md5password) {
 				output(2102, '密码错误');		//密码错误
 			} else {
 				if($user['status'] == 1) {
-					$this->session->set_userdata(array('uid'=>$user['id'], 'username'=>$user['username']));
+					$this->session->set_userdata(array('uid'=>$user['uid'], 'email'=>$user['email']));
 					output(0, '登录成功');
 				} else {
 					output(2103, '账号被锁');	//账号被锁
@@ -52,7 +57,7 @@ class User extends CI_Controller {
 	/**
 	 * 注册
 	 */
-	public function register() {
+	public function do_reg() {
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$password2 = $this->input->post('password2');
@@ -60,30 +65,31 @@ class User extends CI_Controller {
 
 		if(!is_email($email)) output(1005, '邮箱格式错误');
 
-		$count = $this->db->query('SELECT id FROM ab_account WHERE username = "'.mysql_escape_string($email).'" OR email = "'.mysql_escape_string($email).'"')->num_rows();
-		write_log('SELECT id FROM ab_account WHERE username = "'.mysql_escape_string($email).'" OR email = "'.mysql_escape_string($email).'"');
+		$count = $this->db->query('SELECT uid FROM yos_account WHERE email = "'.mysql_escape_string($email).'"')->num_rows();
+		write_log('SELECT uid FROM yos_account WHERE email = "'.mysql_escape_string($email).'"');
+		write_log($password);
 		if($count > 0) output(2109, '该邮箱已被注册');
 		if(strlen($password) < 6) output(2106, '密码长度不能少于6位');
 		if($password != $password2) output(2107, '两次密码输入不一致');
 
-		if($this->db->query("UPDATE ab_account_id SET id = LAST_INSERT_ID(id+1)")) {
-			$uid = $this->db->insert_id();
-			$insert_data = array(
-				'id'			=> $uid,
-				'site_id'		=> 1,
-				'parent_id'		=> $uid,
-				'username'		=> $email,
-				'email'			=> $email,
-				'password'		=> md5($password),
-				'status'		=> 1,
-				'date_orig'		=> $timestamp,
-				'date_last'		=> $timestamp,
-			);
-			$this->base->insert_data('account', $insert_data);
-			$this->session->set_userdata(array('uid'=>$uid, 'username'=>$email));
+		$insert_data = array(
+			'username'		=> $email,
+			'email'			=> $email,
+			'password'		=> md5($password),
+			'status'		=> 1,
+			'ctime'			=> $timestamp,
+		);
+		if($this->base->insert_data('account', $insert_data)) {
+			$this->session->set_userdata(array('uid'=>$this->db->insert_id(), 'email'=>$email));
 			output(0, '注册成功');
 		} else {
 			output(2108, '注册失败');
 		}
 	}
+	
+	public function redirect() {
+		$redirect = get_cookie('redirect') ? get_cookie('redirect') : base_url('index');
+		delete_cookie('redirect');
+		redirect($redirect);
+	}	
 }

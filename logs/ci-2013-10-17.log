@@ -1,0 +1,10 @@
+2013-10-17 12:32:47 --> SELECT uid FROM yos_account WHERE email = "wb-zhanghao@taobao.com"
+2013-10-17 12:32:47 --> 
+2013-10-17 12:32:55 --> SELECT uid FROM yos_account WHERE email = "wb-zhanghao@taobao.com"
+2013-10-17 12:32:55 --> dddddd
+2013-10-17 12:33:10 --> SELECT uid FROM yos_account WHERE email = "wb-zhanghao@taobao.com"
+2013-10-17 12:33:10 --> dddddd
+2013-10-17 12:33:33 --> SELECT uid FROM yos_account WHERE email = "wb-zhanghao1@taobao.com"
+2013-10-17 12:33:33 --> dddddd
+2013-10-17 12:34:48 --> SELECT uid FROM yos_account WHERE email = "wb-zhanghao2@taobao.com"
+2013-10-17 12:34:48 --> dddddd
