@@ -19,9 +19,19 @@ class User extends CI_Controller {
 	public function index() {
 		$this->login();
 	}
-	
+
 	public function reg() {
 		$this->load->view(THEME.'/reg', $this->_data);
+	}
+
+	public function info() {
+		$uid = $this->input->get('uid');
+
+		if($_POST) {
+
+		} else {
+			$user = $this->base->get_data('account', array('uid'=>$uid))->row_array();
+		}
 	}
 
 	/**
@@ -86,10 +96,10 @@ class User extends CI_Controller {
 			output(2108, '注册失败');
 		}
 	}
-	
+
 	public function redirect() {
 		$redirect = get_cookie('redirect') ? get_cookie('redirect') : base_url('index');
 		delete_cookie('redirect');
 		redirect($redirect);
-	}	
+	}
 }
