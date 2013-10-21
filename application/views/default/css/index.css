@@ -1,0 +1,6 @@
+.slider_box {  }
+.slider_title { font-size: 18px; font-weight: 600; }
+.slider_box .pre, .slider_box .next { float: left; width: 30px; height: 160px; background: #F00; }
+.slider_imgs { float: left; width: 940px; }
+.slider_imgs li { float: left; margin: 0 5px 0 5px; }
+.slider_imgs li img { width: 120px; height: 160px; }
