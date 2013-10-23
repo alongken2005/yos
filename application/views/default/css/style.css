@@ -31,14 +31,17 @@ textarea { overflow: auto; vertical-align: top; }
 
 .home_header .site_name { float: left; margin-left: 330px; line-height: 30px; font-size: 20px; color: #FFF; }
 .header_box { background: #32A1FB; height: 30px;  }
-.home_header { width: 1000px; margin: 0 auto; height: 30px;  }
-.home_header .browse { color: #FFF; float: left; width: 90px; height: 30px; font-size: 16px; text-align: right; line-height: 30px; background: url(../images/browse.png) no-repeat 10px center; }
+.home_header { width: 1000px; margin: 0 auto; height: 30px; position: relative; }
+.home_header .browse { color: #FFF; float: left; width: 90px; height: 30px; font-size: 16px; text-align: right; line-height: 30px; background: url(../images/browse.png) no-repeat 5px center; }
 .home_header .search_box { float: right; margin-right: 10px; }
 .home_header .keyword { float: left; width: 180px; height: 24px; margin-top: 3px; line-height: 24px; background: #FFF; border: none; }
 .home_header .dosearch { float: left; width: 40px; height: 24px; margin-top: 3px; line-height: 24px; background: #333; color: #FFF; border: none; }
 .home_header .header_pic { float: right; margin-top: 3px; margin-left: 5px; width: 24px; height: 24px; }
 .home_header .header_pic img { width: 24px; height: 24px; }
 .home_header .username { padding: 0 10px; float: right; height: 30px; line-height: 30px; }
+.header_menu { border: 1px solid #32A1FB; border-top: none; width: 100px; background: #FFF; font-size: 15px; overflow: hidden; zoom: 1; top: 0; position: absolute; z-index: 200; display: none; padding-bottom: 5px; }
+.header_menu a { float: left; width: 95px; height: 20px; line-height: 20px; padding-left: 5px; color: #666; padding-bottom: 3px; cursor: point; }
+.header_menu .browse { color: #666; padding-left: 0; }
 
 .footer { padding: 10px 0; margin-top: 10px; color: #999; overflow: hidden; zoom: 1; }
 .footer .gh { float: left; margin-left: 200px; width: 44px; height: 47px; background: url(../images/gh.jpg) no-repeat; }
