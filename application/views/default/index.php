@@ -1,7 +1,7 @@
 <?php $this->load->view(THEME.'/header');?>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/index.css"/>
 <div class="cover_float">
-	
+
 </div>
 <div class="box">
 	<div class="slider_title">Continue Reading for Jerry</div>
@@ -11,7 +11,7 @@
 			<ul class="sliderul">
 			<?php for($i = 1; $i<10; $i++) {?>
 				<li>
-					<img src="data/12.jpg"/>
+					<img src="data/pic.png"/>
 					<div><?="好吧".$i?></div>
 				</li>
 			<?php }?>
@@ -27,7 +27,7 @@
 			<ul class="sliderul">
 			<?php for($i = 1; $i<10; $i++) {?>
 				<li>
-					<img src="data/12.jpg"/>
+					<img src="data/pic.png"/>
 					<div><?="好吧".$i?></div>
 				</li>
 			<?php }?>
@@ -43,7 +43,7 @@
 			<ul class="sliderul">
 			<?php for($i = 1; $i<10; $i++) {?>
 				<li>
-					<img src="data/12.jpg"/>
+					<img src="data/pic.png"/>
 					<div><?="好吧".$i?></div>
 				</li>
 			<?php }?>
@@ -53,14 +53,22 @@
 	</div>
 </div>
 
+<div class="slider_float">
+	<h3>fdfdssd</h3>
+	<div class="author">author:张浩</div>
+	<div>Short description of the book. Short description of the book. Short description of the book. Short description of the book Short description of the book. Short description of the book.</div>
+	<div></div>
+</div>
+
 <script type="text/javascript">
 	$(function() {
 		sliderMove('.read_his');
 		sliderMove('.my_list');
 		sliderMove('.top_picks');
 
-		$('.slider_box li').hover(function() {
-
+		$('.sliderul li img').mouseover(function() {
+			var offset = $(this).offset();
+			$('.slider_float').css({left: offset.left+80, top:offset.top+20}).show();
 		});
 	})
 
