@@ -6,8 +6,7 @@
  * @author ZhangHao
  */
 
-class Book extends MY_Controller {
-	private $_data;
+class Booklist extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -19,13 +18,5 @@ class Book extends MY_Controller {
 	 */
 	public function index() {
 		echo "fdfd";
-	}
-	
-	public function edit () {
-		if($_POST) {
-			
-		} else {
-			$this->load->view(THEME.'/book_edit', $this->_data);
-		}
 	}
 }

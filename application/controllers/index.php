@@ -5,15 +5,20 @@
  * @version 1.0.0 (Thu Feb 23 13:49:18 GMT 2012)
  * @author ZhangHao
  */
+ 
 class Index extends MY_Controller {
-
+	private $_data;
+	
     public function __construct() {
 		parent::__construct();
 		$this->load->model('base_mdl', 'base');
     }
 
 	public function index() {
-		$this->_data = array();
+		
+		$this->_data['user'] = $user = $this->checkLogin();
+		//debug($user);
+		
 		$this->load->view(THEME.'/index', $this->_data);
 	}
 }

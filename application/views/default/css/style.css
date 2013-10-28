@@ -38,7 +38,7 @@ textarea { overflow: auto; vertical-align: top; }
 .home_header .dosearch { float: left; width: 40px; height: 24px; margin-top: 3px; line-height: 24px; background: #333; color: #FFF; border: none; }
 .home_header .header_pic { float: right; margin-top: 3px; margin-left: 5px; width: 24px; height: 24px; }
 .home_header .header_pic img { width: 24px; height: 24px; }
-.home_header .username { padding: 0 10px; float: right; height: 30px; line-height: 30px; }
+.home_header .username { padding-left: 10px; float: right; height: 30px; line-height: 30px; }
 .header_menu { border: 1px solid #32A1FB; border-top: none; width: 100px; background: #FFF; font-size: 15px; overflow: hidden; zoom: 1; top: 0; position: absolute; z-index: 200; display: none; padding-bottom: 5px; }
 .header_menu a { float: left; width: 95px; height: 20px; line-height: 20px; padding-left: 5px; color: #666; padding-bottom: 3px; cursor: point; }
 .header_menu .browse { color: #666; padding-left: 0; }

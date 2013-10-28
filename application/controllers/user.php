@@ -46,14 +46,14 @@ class User extends CI_Controller {
 			output(2101, '用户名或密码为空');			//用户名或密码为空
 		}
 
-		$user = $this->base->get_data('account', array('email'=>$username), 'uid,status,email,password')->row_array();
+		$user = $this->base->get_data('account', array('email'=>$username), 'uid,status,email,password,username')->row_array();
 
 		if($user) {
 			if($user['password'] != $md5password) {
 				output(2102, '密码错误');		//密码错误
 			} else {
 				if($user['status'] == 1) {
-					$this->session->set_userdata(array('uid'=>$user['uid'], 'email'=>$user['email']));
+					set_cookie('user', authcode(json_encode(array('uid'=>$user['uid'], 'email'=>$user['email'], 'username'=>$user['username'])), 'ENCODE'), 3600*24);
 					output(0, '登录成功');
 				} else {
 					output(2103, '账号被锁');	//账号被锁
@@ -62,6 +62,11 @@ class User extends CI_Controller {
 		} else {
 			output(2104, '用户不存在');			//用户不存在
 		}
+	}
+	
+	public function loginout() {
+		set_cookie('user', '', -100);
+		redirect('index');
 	}
 
 	/**
@@ -90,7 +95,9 @@ class User extends CI_Controller {
 			'ctime'			=> $timestamp,
 		);
 		if($this->base->insert_data('account', $insert_data)) {
-			$this->session->set_userdata(array('uid'=>$this->db->insert_id(), 'email'=>$email));
+		
+			set_cookie('user', authcode(json_encode(array('uid'=>$this->db->insert_id(), 'email'=>$email, 'username'=>$email)), 'ENCODE'), 3600*24);
+			//$this->session->set_userdata(array('uid'=>$this->db->insert_id(), 'email'=>$email));
 			output(0, '注册成功');
 		} else {
 			output(2108, '注册失败');
@@ -98,7 +105,7 @@ class User extends CI_Controller {
 	}
 
 	public function redirect() {
-		$redirect = get_cookie('redirect') ? get_cookie('redirect') : base_url('index');
+		$redirect = get_cookie('redirect') ? get_cookie('redirect') : site_url('index');
 		delete_cookie('redirect');
 		redirect($redirect);
 	}

@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>YouShelf</title>
-	<script type="text/javascript" src="<?=base_url('./common/js/jquery.js')?>"></script>
+	<base id="headbase" href="<?=base_url()?>">
+	<script type="text/javascript" src="common/js/jquery.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('.browse').hover(function() {
@@ -35,9 +36,15 @@
 			<a href="">Sci-Fi</a>
 		</div>
 		<a class="browse png" href="javascript:void(0)">Browse</a>
-		<div class="site_name">YouShelf</div>
-		<a href="<?=site_url()?>" class="username">ZhangHao</a>
+		<div class="site_name"><a href="<?=site_url()?>">YouShelf</a></div>
+	<?php if(isset($user) && $user) { ?>
+		<a href="<?=site_url('user/loginout')?>" class="username">退出</a>
+		<a href="<?=site_url()?>" class="username"><?=$user['username']?></a>
 		<a href="<?=site_url()?>" class="header_pic"><img src="<?=THEME_VIEW?>images/noheader.jpg"/></a>
+	<?php } else {?>
+		<a href="<?=site_url('user/reg')?>" class="username">注册</a>
+		<a href="<?=site_url('user/reg')?>" class="username">登陆</a>
+	<?php } ?>
 		<form action="" method="get" class="search_box">
 			<input type="text" name="keyword" class="keyword"/>
 			<input type="submit" value="搜索" class="dosearch"/>

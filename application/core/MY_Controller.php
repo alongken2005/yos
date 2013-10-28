@@ -6,5 +6,16 @@ class MY_Controller extends CI_Controller {
         parent::__construct();
 		
     }
+    
+    public function checkLogin() {
+	    $user = get_cookie('user');
+	    if($user) {
+		    $userInfo = authcode($user);
+		    
+		    if($userInfo) return json_decode($userInfo, true);
+	    }
+	    
+	    return false;
+    }
 	
 }

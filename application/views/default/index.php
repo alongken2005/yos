@@ -1,8 +1,8 @@
 <?php $this->load->view(THEME.'/header');?>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/index.css"/>
-<div class="cover_float">
+<link rel="stylesheet" href="common/powerFloat/powerFloat.css" type="text/css"/>
 
-</div>
+
 <div class="box">
 	<div class="slider_title">Continue Reading for Jerry</div>
 	<div class="read_his slider_box">
@@ -60,16 +60,20 @@
 	<div></div>
 </div>
 
+<script type="text/javascript" src="common/powerFloat/jquery-powerFloat-min.js"></script>
 <script type="text/javascript">
 	$(function() {
+	
+		$('.sliderul li img').powerFloat({
+			target: $(".slider_float"),
+			showDelay: 1000,
+			offsets: {x: 50, y: -60},
+		});
+
 		sliderMove('.read_his');
 		sliderMove('.my_list');
 		sliderMove('.top_picks');
 
-		$('.sliderul li img').mouseover(function() {
-			var offset = $(this).offset();
-			$('.slider_float').css({left: offset.left+80, top:offset.top+20}).show();
-		});
 	})
 
 	function sliderMove(selected) {
