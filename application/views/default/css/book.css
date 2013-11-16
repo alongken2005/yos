@@ -1,10 +1,12 @@
-.slider_box { position: relative; }
-.slider_title { font-size: 18px; font-weight: 600; height: 30px; line-height: 30px; }
-.slider_box .pre, .slider_box .next { z-index: 100; position: absolute; width: 30px; height: 160px; background: #000; opacity: 0.5; top: 0; display: none; }
-.slider_box .pre { left: 0; }
-.slider_box .next { right: 0; }
-.slider_imgs { position: relative; width: 1000px; height: 200px; overflow: hidden; }
-.slider_imgs ul { position: absolute; width: 5000px; height: 200px; display: block; }
-.slider_imgs li { float: left; margin-right: 10px; }
-.slider_imgs li img { width: 120px; height: 160px; }
-.slider_float { position: absolute; width: 200px; border: 1px solid #666; border-radius: 5px; padding: 5px 10px; background: #FFF; z-index: 250; display: none; }
+.book_detail { margin-top: 20px; }
+.book_detail .cover { float: left; margin-right: 20px; }
+.book_detail .base { float: left; width: 780px; }
+.star { overflow: hidden; zoom: 1; }
+.base #star, .star span { float: left; }
+.star span { height: 24px; line-height: 24px; }
+.base .title { font-size: 18px; font-weight: 600; }
+.base li { margin-bottom: 10px; }
+.book_detail .tab { border-left: 1px solid #94C025; overflow: hidden; zoom:1; }
+.book_detail .tab a { float: left; font-size: 14px; color: #FFF; height: 35px; line-height: 35px; padding: 0 25px; border: 1px solid #94C025; border-left: none; border-bottom: none; background: #A5D62D; }
+.book_detail .tab a:hover, .book_detail .tab .active { color: #FFF; background: #94C025;; }
+.book_info h3 { border-top: 1px solid #94C025; padding-left: 10px; font-size: 20px; font-weight: normal; height: 35px; line-height: 35px; }

@@ -9,10 +9,10 @@
 		<a href="" class="pre"></a>
 		<div class="slider_imgs">
 			<ul class="sliderul">
-			<?php for($i = 1; $i<10; $i++) {?>
+			<?php foreach ($cread as $v) {?>
 				<li>
-					<img src="data/pic.png"/>
-					<div><?="好吧".$i?></div>
+					<a href="<?=site_url('book/detail?do=detail&bid='.$v['id'])?>"><img src="data/books/<?=$v['cover']?>"/></a>
+					<div><?=$v['title']?></div>
 				</li>
 			<?php }?>
 			</ul>
@@ -53,19 +53,17 @@
 	</div>
 </div>
 
-<div class="slider_float">
-	<h3>fdfdssd</h3>
-	<div class="author">author:张浩</div>
-	<div>Short description of the book. Short description of the book. Short description of the book. Short description of the book Short description of the book. Short description of the book.</div>
-	<div></div>
-</div>
+<div class="slider_float"></div>
 
-<script type="text/javascript" src="common/powerFloat/jquery-powerFloat-min.js"></script>
+<script type="text/javascript" src="common/powerFloat/jquery-powerFloat.js"></script>
 <script type="text/javascript">
 	$(function() {
 	
-		$('.sliderul li img').powerFloat({
-			target: $(".slider_float"),
+		$('.sliderul li a').powerFloat({
+			eventType: "hover",
+			targetMode: "ajax",
+			target: "<?=site_url('book/floatinfo?bid=1')?>",
+			//targetAttr: "href",
 			showDelay: 1000,
 			offsets: {x: 50, y: -60},
 		});

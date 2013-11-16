@@ -7,4 +7,5 @@
 .slider_imgs ul { position: absolute; width: 5000px; height: 200px; display: block; }
 .slider_imgs li { float: left; margin-right: 10px; }
 .slider_imgs li img { width: 120px; height: 160px; }
+.slider_imgs li div { width: 120px; word-wrap: break-word; word-break: normal; }
 .slider_float { position: absolute; width: 200px; border: 1px solid #666; border-radius: 5px; padding: 5px 10px; background: #FFF; z-index: 250; display: none; }

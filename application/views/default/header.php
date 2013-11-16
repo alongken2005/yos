@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>YouShelf</title>
 	<base id="headbase" href="<?=base_url()?>">
-	<script type="text/javascript" src="common/js/jquery.js"></script>
+	<script type="text/javascript" src="common/js/jquery-1.4.2.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('.browse').hover(function() {
@@ -37,16 +37,19 @@
 		</div>
 		<a class="browse png" href="javascript:void(0)">Browse</a>
 		<div class="site_name"><a href="<?=site_url()?>">YouShelf</a></div>
-	<?php if(isset($user) && $user) { ?>
+	<?php
+	    if($user = get_cookie('user')) {
+		    $user = json_decode(authcode($user), true);
+	?>
 		<a href="<?=site_url('user/loginout')?>" class="username">退出</a>
-		<a href="<?=site_url()?>" class="username"><?=$user['username']?></a>
-		<a href="<?=site_url()?>" class="header_pic"><img src="<?=THEME_VIEW?>images/noheader.jpg"/></a>
+		<a href="<?=site_url('user/info')?>" class="username"><?=$user['username']?></a>
+		<a href="<?=site_url('user/info')?>" class="header_pic"><img src="<?=THEME_VIEW?>images/noheader.jpg"/></a>
 	<?php } else {?>
 		<a href="<?=site_url('user/reg')?>" class="username">注册</a>
 		<a href="<?=site_url('user/reg')?>" class="username">登陆</a>
 	<?php } ?>
-		<form action="" method="get" class="search_box">
-			<input type="text" name="keyword" class="keyword"/>
+		<form action="<?=site_url('search/lists')?>" method="get" class="search_box" target="_blank">
+			<input type="text" name="keyword" value="<?=isset($keyword) && $keyword ? $keyword : ''?>" class="keyword"/>
 			<input type="submit" value="搜索" class="dosearch"/>
 		</form>
 	</div>

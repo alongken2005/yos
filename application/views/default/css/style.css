@@ -5,7 +5,7 @@ ol, ul {list-style: none; }
 a { color: #000; text-decoration: none; out-line: none; }
 a:hover { color: #666; text-decoration: underline; }
 img { border: 0; }
-select { border-radius: 2px; border: 1px solid #e0dfdd; background: #FFF; }
+select { border: 1px solid #e0dfdd; background: #FFF; }
 button, input { line-height: normal; *overflow: visible; }
 textarea { overflow: auto; vertical-align: top; }
 .left { float: left; }
@@ -15,17 +15,17 @@ textarea { overflow: auto; vertical-align: top; }
 .clearfix { overflow: hidden; zoom: 1; }
 
 /*输入框*/
-.input1 { width: 80px; height: 26px; line-height: 26px; background: #FFF; color: #714a3a; font-size: 14px; font-weight: bold; padding: 0 3px; border: 1px solid #e0dfdd; }
-.input2 { width: 180px; height: 26px; line-height: 26px; background: #FFF; color: #714a3a; font-size: 14px; font-weight: bold; padding: 0 3px; border: 1px solid #e0dfdd; }
-.input3 { width: 160px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.input4 { width: 100px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.input5 { width: 240px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.input6 { width: 320px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.input7 { width: 100px; height: 20px; line-height: 20px; background: #F7F7F7; border: 1px solid #DBDBDB; }
+.input1 { width: 80px; height: 30px; line-height: 30px; background: #FFF; color: #714a3a; padding: 0 5px; border: 1px solid #E0DFDD; }
+.input2 { width: 180px; height: 30px; line-height: 30px; background: #FFF; color: #714a3a; padding: 0 5px; border: 1px solid #E0DFDD; }
+.input3 { width: 160px; height: 30px; line-height: 30px; padding: 0 5px; background: #FFF; border: 1px solid #DBDBDB; }
+.input4 { width: 100px; height: 30px; line-height: 30px; padding: 0 5px; background: #FFF; border: 1px solid #DBDBDB; }
+.input5 { width: 240px; height: 30px; line-height: 30px; padding: 0 5px; background: #FFF; border: 1px solid #DBDBDB; }
+.input6 { width: 320px; height: 30px; line-height: 30px; padding: 0 5px; background: #FFF; border: 1px solid #DBDBDB; }
+.textarea1 { width: 300px; height: 80px; background: #FFF; color: #714a3a; border: 1px solid #E0DFDD; }
 
 /*按钮 */
-.btn1 { padding: 2px 10px; font-size: 13px; text-align: center; text-shadow: #80AD10 0 1px 0; border:1px solid #80AD10; border-radius: 2px; background: #A5D62D; background-image: -webkit-linear-gradient(top, #A5D62D, #9AC827); color:#FFF; cursor: auto; display: inline-block; cursor: pointer; }
-.btn1:hover { border:1px solid #6A8F0D; background: #94C025; background-image: -webkit-linear-gradient(top, #94C025, #799D1E); }
+.btn1 { padding: 8px 20px; font-size: 16px; text-align: center; text-shadow: #80AD10 0 1px 0; border:0px solid #80AD10; background: #A5D62D; background-image: -webkit-linear-gradient(top, #A5D62D, #9AC827); color:#FFF; cursor: auto; display: inline-block; cursor: pointer; }
+.btn1:hover { border:0px solid #6A8F0D; color: #FFF; background: #94C025; background-image: -webkit-linear-gradient(top, #94C025, #799D1E); }
 .err { border: 1px solid #FF0E00; margin: 0 5px; padding: 3px 10px 2px; background: #F7EFDB; color: #FF0E00; }
 .box { width: 1000px; margin: 0 auto; }
 
@@ -42,6 +42,16 @@ textarea { overflow: auto; vertical-align: top; }
 .header_menu { border: 1px solid #32A1FB; border-top: none; width: 100px; background: #FFF; font-size: 15px; overflow: hidden; zoom: 1; top: 0; position: absolute; z-index: 200; display: none; padding-bottom: 5px; }
 .header_menu a { float: left; width: 95px; height: 20px; line-height: 20px; padding-left: 5px; color: #666; padding-bottom: 3px; cursor: point; }
 .header_menu .browse { color: #666; padding-left: 0; }
+
+.slider_left { float: left; width: 230px; background: #99d1ff; padding: 10px 0 20px 0; margin-top: 20px; }
+.slider_left li { height: 30px; line-height: 30px; padding: 0 15px; }
+.slider_left li:hover { background: #333; }
+.slider_left li:hover a { color: #FFF; }
+.slider_left .active { background: #333; }
+.slider_left .active a { color: #FFF; }
+.slider_left a { color: #333; font-size: 16px; }
+.slider_left .sec_level { float: left; }
+.space_box { float: right; width: 750px; margin-top: 20px; }
 
 .footer { padding: 10px 0; margin-top: 10px; color: #999; overflow: hidden; zoom: 1; }
 .footer .gh { float: left; margin-left: 200px; width: 44px; height: 47px; background: url(../images/gh.jpg) no-repeat; }

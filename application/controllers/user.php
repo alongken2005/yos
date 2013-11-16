@@ -5,7 +5,7 @@
  * @author 张浩
  */
 
-class User extends CI_Controller {
+class User extends MY_Controller {
 	private $_data;
 
 	public function __construct() {
@@ -20,18 +20,24 @@ class User extends CI_Controller {
 		$this->login();
 	}
 
+	public function login() {
+		$this->load->view(THEME.'/reg', $this->_data);
+	}
+	
 	public function reg() {
 		$this->load->view(THEME.'/reg', $this->_data);
 	}
 
 	public function info() {
-		$uid = $this->input->get('uid');
-
-		if($_POST) {
-
-		} else {
-			$user = $this->base->get_data('account', array('uid'=>$uid))->row_array();
+		$user = $this->checkLogin();
+		if(!$user) {
+			$this->msg->showmessage('请先登陆！', site_url('user/login'));
 		}
+
+
+		$this->_data['account'] = $this->base->get_data('account', array('uid'=>$user['uid']))->row_array();
+		$this->_data['active'] = 'userinfo';
+		$this->load->view(THEME.'/user_info', $this->_data);
 	}
 
 	/**

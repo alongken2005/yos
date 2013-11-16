@@ -15,10 +15,7 @@ class Index extends MY_Controller {
     }
 
 	public function index() {
-		
-		$this->_data['user'] = $user = $this->checkLogin();
-		//debug($user);
-		
+		$this->_data['cread'] = $this->base->get_data('book')->result_array();
 		$this->load->view(THEME.'/index', $this->_data);
 	}
 }
