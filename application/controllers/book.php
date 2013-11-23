@@ -25,13 +25,13 @@ class Book extends MY_Controller {
 	}
 	
 	public function lists() {
-		
 		$this->_data['view'] = $this->input->get('view') ? $this->input->get('view') : 'list';
 		//检查登陆状态
 		if(!$this->_user) {
 			$this->msg->showmessage('请先登陆！', site_url('user/login'));
 		}	
 		
+		$this->_data['active'] = 'edit';
 		$this->_data['books'] = $this->base->get_data('book', array('uid'=>$this->_user['uid']), '*', 0, 0, 'mtime DESC')->result_array();
 		$this->load->view(THEME.'/book_list', $this->_data);
 	}
@@ -40,10 +40,38 @@ class Book extends MY_Controller {
 	 *书本信息页
 	 */
 	public function detail () {
-		$this->_data['do'] = $this->input->get('do');
+		$this->_data['do'] = $do = $this->input->get('do');
 		$this->_data['bid'] = $bid = intval($this->input->get('bid'));
 		$this->_data['book'] = $this->base->get_data('book', array('id'=>$bid))->row_array();
-		$this->_data['genre'] = $this->base->get_data('book_genre', array('id'=>$this->_data['book']['genre']))->row_array();
+
+		if($do == 'detail') {
+			$this->_data['genre'] = $this->base->get_data('book_genre', array('id'=>$this->_data['book']['genre']))->row_array();
+		} else if($do == 'reviews') {
+			$scoreArray = $this->base->get_data('book_score', array('bid'=>$bid), 'score')->result_array();
+			$score1 = $score2 = $score3 = $score4 = $score5 = array();
+			foreach ($scoreArray as $v) {
+				if ($v['score'] == 5) {
+					$score5[] = $v['score'];
+				} else if($v['score'] == 4) {
+					$score4[] = $v['score'];
+				} else if($v['score'] == 3) {
+					$score3[] = $v['score'];
+				} else if($v['score'] == 2) {
+					$score2[] = $v['score'];
+				} else if($v['score'] == 1) {
+					$score1[] = $v['score'];
+				}				
+			}
+
+			$scoretotal = count($scoreArray);
+			$this->_data['score1'] = count($score1)*100/$scoretotal;
+			$this->_data['score2'] = count($score2)*100/$scoretotal;
+			$this->_data['score3'] = count($score3)*100/$scoretotal;
+			$this->_data['score4'] = count($score4)*100/$scoretotal;
+			$this->_data['score5'] = count($score5)*100/$scoretotal;
+		}
+
+
 		$this->load->view(THEME.'/book_detail', $this->_data);
 	}
 
@@ -55,9 +83,10 @@ class Book extends MY_Controller {
 	public function floatinfo () {
 		$bid = intval($this->input->get('bid'));
 
-		$book = $this->base->get_data('book', array('id'=>$bid))->row_array();
-		$content = '787897798';
-		exit($content);
+		$this->_data['book'] = $this->base->get_data('book', array('id'=>$bid))->row_array();
+		
+		echo $this->load->view(THEME.'/book_floatinfo', $this->_data, true);
+		exit;
 	}
 
 	/**
@@ -67,7 +96,7 @@ class Book extends MY_Controller {
 
 		$bid = intval($this->input->post('bid'));
 		$score = intval($this->input->post('score'));
-
+		exit("fdfdfd");
 		if(!$bid || !$score) exit("error");
 		if(!$this->_user) exit("nologin");
 
@@ -95,8 +124,9 @@ class Book extends MY_Controller {
 		$id 	= intval($this->input->get('id'));
 		$step 	= $this->input->get('step');
 		$step 	= $step ? $step : 1;
-		
+
 		if($_POST) {
+
 			if($step == 1) {
 				$dirname = './data/books/'.date('Y/m/');
 				createFolder($dirname);
@@ -107,7 +137,7 @@ class Book extends MY_Controller {
 					'author'		=> $this->input->post('author'),
 					'publisher' 	=> $this->input->post('publisher'),
 					'genre'			=> $this->input->post('genre'),
-					'price'			=> $this->input->post('price'),
+					'price'			=> (float)$this->input->post('price'),
 					'paid_section'	=> $this->input->post('paid_section'),
 					'description'	=> $this->input->post('description'),
 					'mtime'			=> time()
@@ -145,17 +175,20 @@ class Book extends MY_Controller {
 					$insert_data['cover'] = date('Y/m/').$upload_data['file_name'];
 				}
 				
-				if($id) {
+				if($id > 0) {
 					$this->base->update_data('book', array('id'=>$id), $insert_data);
 					$this->msg->showmessage('修改完成', site_url('book/edit?step=1&id='.$id));
-					//redirect(site_url('book/edit?step=2'));
 				} else {
 					$insert_data['uid'] 	= $uid;
 					$insert_data['ctime'] 	= time();
 
 					$id = $this->base->insert_data('book', $insert_data);
+
 					$this->msg->showmessage('BaseInfo完成', site_url('book/edit?step=2&id='.$id));
 				}
+			} else if($setp == 2) {
+				if(!$id) $this->msg->showmessage('Add Book Fisrt！', site_url('book/edit'));
+
 			}
 			
 		} else {

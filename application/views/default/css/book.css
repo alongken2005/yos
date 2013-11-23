@@ -3,10 +3,25 @@
 .book_detail .base { float: left; width: 780px; }
 .star { overflow: hidden; zoom: 1; }
 .base #star, .star span { float: left; }
-.star span { height: 24px; line-height: 24px; }
+.star span { height: 22px; line-height: 22px; }
 .base .title { font-size: 18px; font-weight: 600; }
 .base li { margin-bottom: 10px; }
 .book_detail .tab { border-left: 1px solid #94C025; overflow: hidden; zoom:1; }
 .book_detail .tab a { float: left; font-size: 14px; color: #FFF; height: 35px; line-height: 35px; padding: 0 25px; border: 1px solid #94C025; border-left: none; border-bottom: none; background: #A5D62D; }
 .book_detail .tab a:hover, .book_detail .tab .active { color: #FFF; background: #94C025;; }
 .book_info h3 { border-top: 1px solid #94C025; padding-left: 10px; font-size: 20px; font-weight: normal; height: 35px; line-height: 35px; }
+.book_info .star { margin-bottom: 10px; }
+.startfloat h3 { padding-bottom: 10px; }
+.startfloat div { margin-bottom: 5px; }
+#star_0, #star_1, #star_2, #star_3, #star_4, #star_5 { float: left; width: 115px; height: 22px; background-image: url(../images/starts.png); background-repeat: no-repeat; } 
+#star_0 { background-position: 0 -110px; }
+#star_1 { background-position: 0 -88px; }
+#star_2 { background-position: 0 -66px; }
+#star_3 { background-position: 0 -44px; }
+#star_4 { background-position: 0 -22px; }
+#star_5 { background-position: 0 0; }
+.star_list { float: left; width: 300px; }
+.writeReview { float: left; }
+.writeReview div { float: left; padding-left: 10px; font-size: 14px; height: 24px; line-height: 24px; }
+.star_list .star span { width: 150px; height: 3px; margin: 10px 0 0 10px; background: #CCC; }
+.star_list .star .percentage { height: 3px; background: #F00; }

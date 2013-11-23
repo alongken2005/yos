@@ -86,9 +86,7 @@ class User extends MY_Controller {
 
 		if(!is_email($email)) output(1005, '邮箱格式错误');
 
-		$count = $this->db->query('SELECT uid FROM yos_account WHERE email = "'.mysql_escape_string($email).'"')->num_rows();
-		write_log('SELECT uid FROM yos_account WHERE email = "'.mysql_escape_string($email).'"');
-		write_log($password);
+		$count = $this->db->query('SELECT uid FROM yos_account WHERE email = "'.$this->db->escape_str($email).'"')->num_rows();
 		if($count > 0) output(2109, '该邮箱已被注册');
 		if(strlen($password) < 6) output(2106, '密码长度不能少于6位');
 		if($password != $password2) output(2107, '两次密码输入不一致');

@@ -6,7 +6,7 @@
 
 	<div class="space_box">
 		<div style="overflow:hidden;zoom:1"/>
-			<a href="" class="btn1" style="float:left">Add New Book</a>
+			<a href="<?=site_url('book/edit')?>" class="btn1" style="float:left">Add New Book</a>
 			<a href="<?=site_url('book/lists?view=grid')?>" class="viewgrid"></a>
 			<a href="<?=site_url('book/lists?view=list')?>" class="viewlist"></a>
 		</div>

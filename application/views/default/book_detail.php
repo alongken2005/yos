@@ -6,7 +6,7 @@
 		<li class="title"><?=$book['title']?></li>
 		<li class="author">Author: <a href=""><?=$book['author']?></a></li>
 		<li class="star">
-			<div id="star"></div>
+			<div id="star_<?=$book['score']?>"></div>
 			<span>(<?=$book['scorenum']?>)</span>
 		</li>
 		<li><a href="" class="btn1">Read</a></li>
@@ -56,11 +56,59 @@
 		</table>
 
 		<h3>Update Histories</h3>
+		<h3>Author & Publisher Info</h3>
+		<h3>Author & Publisher Website</h3>
+		<h3>Reader Agreement</h3>
 	</div>
 	<?php } else if($do == 'reviews') { ?>
 	<div class="book_info">
 		<h3>Facebook</h3>
 		<h3>Ratings</h3>
+		<div class="star">
+			<div id="star_<?=$book['score']?>"></div>
+			<span>&nbsp;&nbsp;<?=$book['scorenum']?> Ratings</span>
+		</div>
+
+		<div class="star_list">
+			<div class="star">
+				<div id="star_5"></div>
+				<span><div class="percentage" style="width:<?=$score5?>%"></div></span>
+			</div>				
+			<div class="star">
+				<div id="star_4"></div>
+				<span><div class="percentage" style="width:<?=$score4?>%"></div></span>
+			</div>
+			<div class="star">
+				<div id="star_3"></div>
+				<span><div class="percentage" style="width:<?=$score3?>%"></div></span>
+			</div>	
+			<div class="star">
+				<div id="star_2"></div>
+				<span><div class="percentage" style="width:<?=$score2?>%"></div></span>
+			</div>	
+			<div class="star">
+				<div id="star_1"></div>
+				<span><div class="percentage" style="width:<?=$score1?>%"></div></span>
+			</div>											
+		</div>
+
+		<div class="writeReview">
+			<div>Rate This Book:&nbsp;&nbsp;</div>
+			<span id="star"></span>
+		</div>
+
+		<div class="clear"></div>
+		<h3>
+			Reviews
+			<select name="reviewType">
+				<option value="helpful">Most Helpful</option>	
+				<option value="recent">Most Recent</option>	
+				<option value="favorable">Most Favorable</option>	
+				<option value="critical">Most Critical</option>	
+			</select>
+
+			<a href="">Write a Review</a>
+		</h3>
 	</div>
 
 	<?php } else if($do == 'related') { ?>
@@ -71,19 +119,21 @@
 <script type="text/javascript">
 	$('#star').raty({
 		score: <?=$book['score']?>,
-		mouseover : function () {
-			return false;
-		}
-		/*click: function (score, evt) {
+		click: function (score, evt) {
 			$.post("<?=site_url('book/score')?>", {bid:"<?=$book['id']?>", score:score}, function(data) {
-				if(data == 'nologin') {
-					alert("Please login first!");
-				} else if(data == 'error') {
-					alert("Done error");
+				alert(data);
+				if(data == "nologin") {
+					//alert("Please login first!");
+					return false;
+				} else if(data == "error") {
+					//alert("Done error");
+					return false;
 				} else {
 					alert("评分成功！本书平均得分 "+data);
+					return false;
 				}
+				return false;
 			});
-		}*/
+		}
 	});
 </script>

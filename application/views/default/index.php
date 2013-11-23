@@ -1,16 +1,17 @@
-<?php $this->load->view(THEME.'/header');?>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/index.css"/>
+<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/book.css"/>
 <link rel="stylesheet" href="common/powerFloat/powerFloat.css" type="text/css"/>
-
-
+<div id="url"></div>
 <div class="box">
-	<div class="slider_title">Continue Reading for Jerry</div>
+	<?php if(isset($this->member) && $this->member) { ?>
+	<div class="slider_title">Continue Reading for <?=$this->member['username']?></div>
 	<div class="read_his slider_box">
 		<a href="" class="pre"></a>
 		<div class="slider_imgs">
 			<ul class="sliderul">
 			<?php foreach ($cread as $v) {?>
 				<li>
+					<input type="hidden" value="<?=site_url('book/floatinfo?bid='.$v['id'])?>"/>
 					<a href="<?=site_url('book/detail?do=detail&bid='.$v['id'])?>"><img src="data/books/<?=$v['cover']?>"/></a>
 					<div><?=$v['title']?></div>
 				</li>
@@ -36,7 +37,7 @@
 		<a href="" class="next"></a>
 	</div>
 
-	<div class="slider_title">Top Picks for Jerry</div>
+	<div class="slider_title">Top Picks for <?=$this->member['username']?></div>
 	<div class="top_picks slider_box">
 		<a href="" class="pre"></a>
 		<div class="slider_imgs">
@@ -51,6 +52,56 @@
 		</div>
 		<a href="" class="next"></a>
 	</div>
+	<?php } ?>
+
+	<div class="slider_title">Popular on YouShelf</div>
+	<div class="top_picks slider_box">
+		<a href="" class="pre"></a>
+		<div class="slider_imgs">
+			<ul class="sliderul">
+			<?php foreach ($popular as $v) {?>
+				<li>
+					<input type="hidden" value="<?=site_url('book/floatinfo?bid='.$v['id'])?>"/>
+					<a href="<?=site_url('book/detail?do=detail&bid='.$v['id'])?>"><img src="data/books/<?=$v['cover']?>"/></a>
+					<div><?=$v['title']?></div>
+				</li>
+			<?php }?>
+			</ul>
+		</div>
+		<a href="" class="next"></a>
+	</div>
+
+	<div class="slider_title">Best Rated</div>
+	<div class="top_picks slider_box">
+		<a href="" class="pre"></a>
+		<div class="slider_imgs">
+			<ul class="sliderul">
+			<?php for($i = 1; $i<10; $i++) {?>
+				<li>
+					<img src="data/pic.png"/>
+					<div><?="好吧".$i?></div>
+				</li>
+			<?php }?>
+			</ul>
+		</div>
+		<a href="" class="next"></a>
+	</div>
+
+	<div class="slider_title">Romance</div>
+	<div class="top_picks slider_box">
+		<a href="" class="pre"></a>
+		<div class="slider_imgs">
+			<ul class="sliderul">
+			<?php for($i = 1; $i<10; $i++) {?>
+				<li>
+					<img src="data/pic.png"/>
+					<div><?="好吧".$i?></div>
+				</li>
+			<?php }?>
+			</ul>
+		</div>
+		<a href="" class="next"></a>
+	</div>		
 </div>
 
 <div class="slider_float"></div>
@@ -62,11 +113,12 @@
 		$('.sliderul li a').powerFloat({
 			eventType: "hover",
 			targetMode: "ajax",
-			target: "<?=site_url('book/floatinfo?bid=1')?>",
-			//targetAttr: "href",
+			target: function() {
+				return $(this).prev("input").val();
+			},
 			showDelay: 1000,
 			offsets: {x: 50, y: -60},
-		});
+		});			
 
 		sliderMove('.read_his');
 		sliderMove('.my_list');
@@ -102,4 +154,3 @@
 		})
 	}
 </script>
-<?php $this->load->view(THEME.'/footer');?>
