@@ -1,7 +1,7 @@
 <?php $this->load->view(THEME.'/header');?>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/space.css"/>
 
-<div class="box">
+<div class="box1000">
 	<?php $this->load->view(THEME.'/slider_left');?>
 
 	<div class="space_box">
@@ -48,7 +48,7 @@
 				</tr>
 				<tr>
 					<th>Price for Paid Section Text:</br>($/1000 words)</th>
-					<td><input type="text" name="price" class="input4" value="<?=isset($row['price']) ? $row['price'] : ''?>"/></td>
+					<td><input type="text" name="price" class="input4" value="<?=isset($row['text_price']) ? $row['text_price'] : ''?>"/></td>
 				</tr>
 				<tr>
 					<th>Define Paid Section:</th>
@@ -65,7 +65,8 @@
 			</table>
 		</form>
 	<?php elseif($step == 2):?>
-		<form action="<?=site_url('book/edit?step=2')?>" method="post">
+		<iframe name='hidden_frame' width="400" height="300" style="display: none;"></iframe>
+		<form action="<?=site_url('book/chapter_add?bid='.$id)?>" method="post">
 			<div style="padding:10px 10px">
 				Content Type:
 				<input type="radio" name="type" value="1" checked="checked"/> Upload Text Chapter by Chapter&nbsp;&nbsp;
@@ -83,28 +84,57 @@
 				<tr>
 					<td><?=$value['dis']?></td>
 					<td><?=$value['title']?></td>
-					<td><a href="">Edit</a></td>
+					<td><a href="<?=site_url('book/edit?cid='.$value['id'])?>">Edit</a></td>
 				</tr>
 			<?php endforeach;?>	
 				<tr class="addChapterBox">
 					<td valign="top"><input type="text" name="dis" class="input1" id="dis"/></td>
 					<td valign="top"><input type="text" name="title" class="input5" id="title"/></td>
-					<td><textarea name="content" class="textarea1" id="content"></textarea>&nbsp;&nbsp;<a href="<?=site_url('book/chapter_add?bid='.$id)?>" id="chapterSave">Save</a></td>
+					<td><textarea name="content" class="textarea1" id="content"></textarea>&nbsp;&nbsp;<input type="submit" id="chapterSave" value="Save" /></td>
 				</tr>													
 			</table>
 			<div style="margin-top:10px;"><a href="<?=site_url('book/edit?step=3&id='.$id)?>" class="btn1">Save and Go Next</a></div>
 		</form>
+	<?php elseif($step == 3):?>
+		<form action="<?=site_url('book/edit?step=3')?>" method="post" style="padding-top:10px;">
+			<div style="overflow:hidden;zoom:1">
+				<div style="font-size:18px;float:left;line-height:34px;">Review Table of Content Before Publishing</div>
+				<a href="javascript:void(0)" class="btn1" style="float:right">Preview This Book</a>
+			</div>
+			<table cellpadding="0" cellspacing="0" class="chapter_table">
+				<tr>
+					<th width="70">Sequence</th>
+					<th>Name</th>
+					<th width="70">Page#</th>
+					<th width="350">Content</th>
+				</tr>
+			<?php foreach ($chapters as $key => $value):?>	
+				<tr>
+					<td><?=$value['dis']?></td>
+					<td><?=$value['title']?></td>
+					<td><?=$value['page']+1?></td>
+					<td>
+						<a href="<?=site_url('book/edit?cid='.$value['id'])?>">Edit</a>&nbsp;&nbsp;
+						<a href="<?=base_url('common/splitWord.swf?bookId='.$value['bid'].'&chapterId='.$value['id'].'&showSave=2')?>" target="_blank">Preview</a>
+					</td>
+				</tr>
+			<?php endforeach;?>														
+			</table>
+			<div style="margin-top:10px;"><a href="<?=site_url('book/edit?step=3&id='.$id)?>" class="btn1">submit</a></div>
+		</form>		
 	<?php endif;?>
 	</div>
 
 </div>
 <script type="text/javascript">
 	$(function() {
+
+		/*
 		$('#chapterSave').click(function() {
 			var ex = /^\d+$/;
 			var dis = $('#dis').val();
 			if(dis == '' || !ex.test(dis)) {
-				alert("Sequence can't be empty or Sequence must be int")
+				alert("Sequence can't be empty or Sequence must be int");
 			}
 
 			if($('#title').val() == '') {
@@ -116,12 +146,26 @@
 			}
 
 			$.post($(this).attr('href'), {dis:$('#dis').val(), title:$('#title').val(), content:$('#content').val()}, function(data) {
-				alert(data);
+				alert(data.msg);
+				if(data.state == 1) {
+					window.location.href="<?=site_url('book/edit?step=2&id='.$id)?>";
+				}
 				return false;
-			})
+			}, 'json');
 			return false;
-		})
+		})*/
 	})
 
+	//上传成功后回调函数
+	function callback(str,reload) {
+		
+		if(reload){
+			window.location.reload();
+		} else{
+			alert(str);
+			//$('#submitbtn').show();
+			//$('#loading').hide();
+		}
+	}
 </script>
 <?php $this->load->view(THEME.'/footer');?>

@@ -1,7 +1,7 @@
 <?php $this->load->view(THEME.'/header');?>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/space.css"/>
 
-<div class="box">
+<div class="box1000">
 	<?php $this->load->view(THEME.'/slider_left');?>
 
 	<div class="space_box">

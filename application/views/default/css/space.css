@@ -1,5 +1,16 @@
+.slider_left { float: left; width: 230px; background: #FFF; padding: 10px 0 20px 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+.slider_left li { height: 30px; line-height: 30px; padding: 0 15px; }
+.slider_left li:hover { background: #333; }
+.slider_left li:hover a { color: #FFF; }
+.slider_left .active { background: #333; }
+.slider_left .active a { color: #FFF; }
+.slider_left a { color: #333; font-size: 16px; }
+.slider_left .sec_level { float: left; }
+.space_box { float: right; width: 750px; }
+.space_box h2 { font-size: 20px; }
+
 .book_edit_table { margin-top: 10px; width: 100%; }
-.book_edit_table th { text-align: right; font-size: 16px; padding-right: 10px; font-weight: normal; }
+.book_edit_table th { width: 150px; text-align: right; font-size: 16px; padding-right: 10px; font-weight: normal; }
 .book_edit_table textarea { width: 320px; height: 80px; background: #F7F7F7; border: 1px solid #DBDBDB; }
 .book_step { height: 40px; background: #EEE; }
 .book_step a { float: left; width: 250px; height: 40px; line-height: 40px; color: #333; font-size: 20px; font-weight: 600; text-align: center; }
@@ -14,3 +25,6 @@
 .chapter_table { width: 100%; margin-top: 10px; }
 .chapter_table th { background: #F3F3F3; color: #666; font-weight: normal; font-size: 12px; padding: 10px 8px; text-align: left; border-top: 1px solid #EEE; border-bottom: 1px solid #EEE; }
 .chapter_table td { padding: 10px 8px; border-bottom: 1px solid #F1F1F1; }
+
+.float_box { width: 500px; padding: 20px; }
+.scrollstep { width: 480px; height: 200px; font-size: 14px; padding: 10px;  border: 1px solid #CCC; background: #FFF; overflow-y: auto; margin: 20px 0;  }

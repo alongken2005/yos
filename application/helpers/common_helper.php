@@ -1,4 +1,3 @@
-
 <?php
 /**
  * 字符截取
@@ -21,7 +20,7 @@ function cutstr($str, $len, $char = '...') {
  * @return boolean
  */
 function is_email($value) {
-	return preg_match("/^[0-9a-zA-Z]+(?:[\_\-][a-z0-9\-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\.[a-zA-Z]+$/i", $value);
+	return preg_match("/^[0-9a-zA-Z]+(?:[\_\-\.][a-z0-9\-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\.[a-zA-Z]+$/i", $value);
 }
 
 /**
@@ -66,18 +65,6 @@ function get_thumb($picUrl, $thumb = TRUE, $baseUrl = './data/uploads/pics/', $b
 }
 
 /**
- * 获取插入id
- * @param type $table
- * @return type
- */
-function getId($table) {
-	$CI =& get_instance();
-	$CI->load->database();
-	$CI->db->query("UPDATE ".$CI->db->dbprefix($table)." SET id = LAST_INSERT_ID(id+1)");
-	return $uid = $CI->db->insert_id();
-}
-
-/**
  * 将换行符等转为html标签
  * @param type $str
  * @return type
@@ -106,6 +93,21 @@ function secfmt($seconds) {
 	return $time;
 }
 
+/**
+ * 验证签名
+ */
+function getSign($action, $random, $sign) {
+	if(!$random) output(3002, '随机数不能为空');
+	if(!$sign) output(3001, '验证字符串错误');
+
+	$signPostfix = config_item('signPostfix');
+	$sign2 = strtoupper(md5($action.$random.$signPostfix));
+	if($sign != $sign2) output(3003, '验证失败');
+}
+
+/**
+ * 调试
+ */
 function debug($value, $type=1, $rr=0) {
 	if(is_array($value) || is_object($value)) {
 		if($rr) {
@@ -123,6 +125,18 @@ function debug($value, $type=1, $rr=0) {
 	}
 }
 
+/**
+ * 接口内容输出
+ */
 function output($result = 0, $value='') {
 	exit(json_encode(array('state'=>$result, 'msg'=>$value)));
+}
+
+/**
+ * 单词统计，去除标点
+ */
+function wordCount($str = ""){
+	$chinese_pattern = "/[\x{4e00}-\x{9fff}\x{f900}-\x{faff}]/u";
+    $str = preg_replace("/[\x{ff00}-\x{ffef}\x{2000}-\x{206F}]/u", "", $str);
+    return preg_match_all($chinese_pattern, $str, $match) + str_word_count(preg_replace($chinese_pattern, "", $str));
 }

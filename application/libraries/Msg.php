@@ -30,7 +30,7 @@ class Msg {
 			header("Location: $url_forward");
 		} else {
 			if($url_forward) {
-				$message = "<a href=\"$url_forward\">$message</a><script>setTimeout(\"window.location.href ='$url_forward';\", ".($second*1000).");</script>";
+				$message = $message."<script>setTimeout(\"window.location.href ='$url_forward';\", ".($second*1000).");</script>";
 			}
 			$data['url_forward'] = $url_forward;
 			$data['message'] = $message;

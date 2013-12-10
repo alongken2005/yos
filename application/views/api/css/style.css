@@ -1,5 +1,5 @@
 * { margin: 0; padding: 0; }
-body { font-size: 12px; }
+body { font-size: 12px; font: 12px/1 Tahoma,Helvetica,Arial,"宋体b8b\4f53",sans-serif; }
 ol, ul { list-style: none; }
 a { color: #415657; text-decoration: none; out-line: none; }
 table { border-collapse: collapse; border-spacing: 0; }
@@ -13,13 +13,7 @@ textarea { overflow: auto; vertical-align: top; color: #714a3a; border: 1px soli
 .clearfix{ overflow: hidden; _zoom: 1; }
 
 /*输入框*/
-.input1 { width: 80px; height: 26px; line-height: 26px; background: #FFF; color: #714a3a; font-size: 14px; font-weight: bold; padding: 0 3px; border: 1px solid #E0DFDD; }
-.input2 { width: 180px; height: 24px; line-height: 24px; background: #FFF; color: #714a3a; padding: 0 3px; border: 1px solid #e0dfdd; box-shadow: inset 0 0 6px rgba(26,26,26,0.1); border-radius: 2px; }
-.input3 { width: 150px; height: 24px; line-height: 24px; padding: 0 3px; background: #FFF; border: 1px solid #DBDBDB; }
-.input4 { width: 100px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.input5 { width: 240px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.input6 { width: 320px; height: 24px; line-height: 24px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.input7 { width: 100px; height: 20px; line-height: 20px; background: #F7F7F7; border: 1px solid #DBDBDB; }
+.warning { background: #EEEEEE; padding: 8px 10px 8px 10px; font-size: 13px; font-weight: 600; color: #D44737; }
 
 /*按钮 */
 .org_search { width: 86px; height: 26px; border: none; cursor: pointer; background: url(../images/org_btn.png) no-repeat; float: right; }
@@ -29,20 +23,23 @@ textarea { overflow: auto; vertical-align: top; color: #714a3a; border: 1px soli
 .submit { width: 64px; height: 25px; font-weight: 600; background-color: #D34231; border: 1px solid #B0281A; cursor: pointer; color: #FFF; border-radius: 2px; }
 
 .api_header { background: #2D2D2D; color: #FFF; height: 40px; line-height: 40px; margin-bottom: 20px; font-size: 18px; font-weight: 600; border-bottom: 1px solid #000; }
-.api_box { width: 1000px; margin: 0 auto; overflow: hidden; zoom: 1; }
+.api_box { width: 1100px; margin: 0 auto; overflow: hidden; zoom: 1; }
 .menu {  float: left; border-top: 1px dotted #D4E2F1; }
-.menu li { font-size: 14px; width: 140px; padding: 7px 10px 7px 20px; border-bottom: 1px dotted #D4E2F1; border-left: 4px solid #FFF; }
-.menu .active { border-left: 4px solid #D34231; }
-.menu .active a { color: #D34231; font-weight: 600; }
+.menu li { font-size: 14px; width: 240px; padding: 7px 10px 7px 20px; border-bottom: 1px dotted #D4E2F1; border-left: 4px solid #FFF; }
+.menu .active { border-left: 4px solid #D34231; font-weight: 600; }
+.menu .active a { color: #D34231; }
 .menu .active a:hover { text-decoration: underline; }
-.module { float: right; width: 800px; }
+.menu .childbox { background: url(../images/treeview-line.png) no-repeat 0 bottom; margin-top: 5px; }
+.menu .childend { height: 22px; line-height: 22px; padding-left: 20px; font-size: 12px; font-weight: normal; background: url(../images/treeview-line.png) no-repeat 0 -1763px; overflow: hidden; }
+.module { float: right; width: 810px; }
 .module h4 { border-bottom: 1px solid #D4E2F1; background-color: #1F4E7C; padding: 6px 10px; color: #FFF; }
 .module .mod_info { padding: 5px 10px; }
 
 .api_table1 { width: 100%; margin-bottom: 25px; }
 .api_table1 th { background-color: #CDCDCD; padding: 8px 10px; font-size: 15px; color: #333; }
-.api_table1 td { padding: 5px 10px; border-top: 1px solid #FFF; background: #EEE; }
+.api_table1 td { padding: 8px 0 8px 8px; border-top: 1px solid #FFF; background: #EEE; }
 .api_table1 .name { text-align: right; padding-right: 10px; width: 15%; font-weight: 600; }
 .api_table1 .title { font-weight: 600; }
 
+.api_url td { height: 40px; color: #FF6600; font-size: 14px; }
 .top_line { border-top: 3px solid #D34231; }

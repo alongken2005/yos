@@ -1,0 +1,39 @@
+通用的
+json_encode(array('state'=>1, 'msg'=>'操作成功')
+json_encode(array('state'=>100, 'msg'=>'操作失败')
+json_encode(array('state'=>1005, 'msg'=>'邮箱格式错误')
+json_encode(array('state'=>1006, 'msg'=>'书本id错误')
+json_encode(array('state'=>1007, 'msg'=>'章节id错误')
+json_encode(array('state'=>1008, 'msg'=>'请先登陆')
+json_encode(array('state'=>1009, 'msg'=>'内容为空')
+
+user.php
+json_encode(array('state'=>2101, 'msg'=>'用户名或密码为空')
+json_encode(array('state'=>2102, 'msg'=>'密码错误')
+json_encode(array('state'=>2103, 'msg'=>'账号被锁')
+json_encode(array('state'=>2104, 'msg'=>'用户不存在')
+json_encode(array('state'=>2106, 'msg'=>'密码长度不能少于6位')
+json_encode(array('state'=>2107, 'msg'=>'两次密码输入不一致')
+json_encode(array('state'=>2108, 'msg'=>'注册失败')
+json_encode(array('state'=>2109, 'msg'=>'该邮箱已被注册')
+json_encode(array('state'=>2110, 'msg'=>'用户名不能为空！')
+
+book.php
+json_encode(array('state'=>2201, 'msg'=>'章节排序错误')
+json_encode(array('state'=>2202, 'msg'=>'章节标题不能为空')
+json_encode(array('state'=>2203, 'msg'=>'评分需在1-5分之间')
+json_encode(array('state'=>2204, 'msg'=>'没有章节内容')
+json_encode(array('state'=>2205, 'msg'=>'页码错误')
+
+
+api
+json_encode(array('state'=>3001, 'msg'=>'验证字符串错误')
+json_encode(array('state'=>3002, 'msg'=>'随机数不能为空')
+json_encode(array('state'=>3003, 'msg'=>'验证失败')
+json_encode(array('state'=>3004, 'msg'=>'章节为空')
+
+
+
+http://yos.childroad.cn/common/SplitWord.swf?bookId=11&chapterId=9&showSave=2
+
+ALTER TABLE `yos`.`yos_account` ADD COLUMN `header` varchar(100) NOT NULL DEFAULT '' AFTER `email`, CHANGE COLUMN `password` `password` char(32) NOT NULL DEFAULT '' AFTER `header`, CHANGE COLUMN `status` `status` tinyint(1) UNSIGNED NOT NULL AFTER `password`, ADD COLUMN `is_author` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' AFTER `status`, ADD COLUMN `organization` varchar(100) NOT NULL DEFAULT '' AFTER `is_author`, ADD COLUMN `street` varchar(100) NOT NULL DEFAULT '' AFTER `organization`, ADD COLUMN `city` varchar(100) NOT NULL DEFAULT '' AFTER `street`, ADD COLUMN `state` varchar(100) NOT NULL DEFAULT '' AFTER `city`, ADD COLUMN `country` varchar(100) NOT NULL DEFAULT '' AFTER `state`, CHANGE COLUMN `ctime` `ctime` int(10) UNSIGNED NOT NULL AFTER `country`;

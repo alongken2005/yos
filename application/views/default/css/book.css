@@ -1,6 +1,6 @@
-.book_detail { margin-top: 20px; }
+.book_detail { width: 845px; margin: 0 auto; padding: 20px; background-color: #F2F2F2; }
 .book_detail .cover { float: left; margin-right: 20px; }
-.book_detail .base { float: left; width: 780px; }
+.book_detail .base { float: left; width: 650px; }
 .star { overflow: hidden; zoom: 1; }
 .base #star, .star span { float: left; }
 .star span { height: 22px; line-height: 22px; }
@@ -13,15 +13,25 @@
 .book_info .star { margin-bottom: 10px; }
 .startfloat h3 { padding-bottom: 10px; }
 .startfloat div { margin-bottom: 5px; }
-#star_0, #star_1, #star_2, #star_3, #star_4, #star_5 { float: left; width: 115px; height: 22px; background-image: url(../images/starts.png); background-repeat: no-repeat; } 
-#star_0 { background-position: 0 -110px; }
-#star_1 { background-position: 0 -88px; }
-#star_2 { background-position: 0 -66px; }
-#star_3 { background-position: 0 -44px; }
-#star_4 { background-position: 0 -22px; }
-#star_5 { background-position: 0 0; }
+.star_0, .star_1, .star_2, .star_3, .star_4, .star_5 { float: left; width: 115px; height: 22px; background-image: url(../images/starts.png); background-repeat: no-repeat; } 
+.star_0 { background-position: 0 -110px; }
+.star_1 { background-position: 0 -88px; }
+.star_2 { background-position: 0 -66px; }
+.star_3 { background-position: 0 -44px; }
+.star_4 { background-position: 0 -22px; }
+.star_5 { background-position: 0 0; }
 .star_list { float: left; width: 300px; }
 .writeReview { float: left; }
 .writeReview div { float: left; padding-left: 10px; font-size: 14px; height: 24px; line-height: 24px; }
 .star_list .star span { width: 150px; height: 3px; margin: 10px 0 0 10px; background: #CCC; }
 .star_list .star .percentage { height: 3px; background: #F00; }
+.reviewList li { border-top: 1px solid #CCC; padding: 10px 0; }
+.reviewList h4 { float: left; font-size: 14px; height: 30px; line-height: 30px; }
+.reviewList .helpful, .reviewList .unhelpful { float: left; margin-left: 10px; width: 100px; height: 23px; line-height: 23px; padding-left: 25px; }
+.reviewList .helpful { background: url(../images/helpful.png) no-repeat; }
+.reviewList .unhelpful { background: url(../images/unhelpful.png) no-repeat; }
+
+.search_title { font-size: 18px; font-weight: 600; }
+.search_list { overflow: hidden; zoom: 1; }
+.search_list li { float: left; margin-right: 18px; margin-top: 15px; }
+.search_list li img { width: 182px; height: 260px; }

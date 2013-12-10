@@ -1,16 +1,15 @@
-body { font-family: '宋体'; }
-.reg_login_box { border: 0px solid #CCC; overflow: hidden; zoom: 1; background: -webkit-linear-gradient(top, #ffffff 0%,#d3dae0 100%); background: linear-gradient(to bottom, #ffffff 0%,#d3dae0 100%); background: -ms-linear-gradient(top, #ffffff 0%,#d3dae0 100%); box-shadow: 0 2px 9px #333; }
+.reg_login_box { width: 1000px; background: #FFF; margin: 120px auto 0 auto; padding: 15px 20px 50px 20px; overflow: hidden; zoom: 1; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
 .reg_login_box .error { color: #F00; background: url(../images/err.png) no-repeat left center; line-height: 16px; padding-left: 20px; }
 .reg_login_box .ok { color: #18B301; background: url(../images/ok.gif) no-repeat left center; line-height: 14px; padding-left: 20px; }
-.reg_login_box h1 { height: 28px; margin-top: 15px; background: url(../images/no_login.png) no-repeat 50px center; }
+.reg_login_box h1 { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 15px; }
 .reg_login_box .rl_input { height: 36px; line-height: 40px; width: 292px; font-size: 16px; font-weight: 600; border: 2px solid #999; border-radius: 10px; margin-bottom: 15px; padding: 0 5px; }
-.login_box { float: left; width: 310px; padding: 30px 85px; }
-.login_box h2 { height: 26px; margin-top: 10px; margin-bottom: 30px; background: url(../images/login_title.png) no-repeat center center; }
+.left_info { float: left; padding-left: 20px; width: 450px; }
+.left_info h2 { font-size: 22px; }
+.left_info div { float: left; width: 450px; font-size: 14px; line-height: 20px; }
+.login_box th { color: #333; font-size: 14px; text-align: right; width: 150px; }
+.login_box { float: right; width: 530px; }
+.login_box h2 { margin-top: 10px; margin-bottom: 30px; background: url(../images/login_title.png) no-repeat center center; }
 .login_box .fgpwd { color: #0099FF; float: right; }
 .login_box label, .reg_box label { color: #666; font-weight: 600; font-size: 13px; margin-bottom: 5px; float: left; }
 .login_box label.dan { color: #999; font-weight: normal; font-size: 13px; margin-bottom: 5px; display: block; }
 .login_box .login_submit { float: left; height: 48px; width: 306px; margin-bottom: 15px; background: url(../images/login_submit.png) no-repeat center; border: none; text-indent: -999px; cursor: pointer; }
-.reg_box { float: right; width: 306px; padding: 30px 90px 60px 100px; background: url(../images/login_ge.png) no-repeat left center; }
-.reg_box h2 { height: 28px; margin-top: 15px; background: url(../images/reg_title.png) no-repeat center center; }
-.reg_box .reg_submit { float: left; height: 48px; width: 306px; margin-bottom: 15px; background: url(../images/reg_submit.png) no-repeat center center; border: none; text-indent: -999px; cursor: pointer; }
-.reg_box .agree { color: #0099FF; margin-bottom: 10px; }

@@ -53,6 +53,7 @@ $db['default']['hostname'] = '58.221.47.226';
 $db['default']['username'] = 'cliuser';
 $db['default']['password'] = 'croad_jml';
 */
+
 $db['default']['hostname'] = '127.0.0.1';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'admin';

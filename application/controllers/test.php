@@ -18,9 +18,8 @@ class Test extends CI_Controller {
 	}
 
 	public function index() {
-		echo date('Z').'<br>';
-		echo date('e').'<br>';
-		echo date('T').'<br>';
-		$this->load->view(THEME.'/paytest');
+		echo "<embed src='".base_url('common/SplitWord.swf?bookId=11&chapterId=11'),"' quality=high width=100 height=100 wmode=transparent type='application/x-shockwave-flash'></embed>";
+
+		//$this->load->view(THEME.'/test');
 	}
 }

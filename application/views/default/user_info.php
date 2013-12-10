@@ -1,7 +1,6 @@
-<?php $this->load->view(THEME.'/header');?>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/space.css"/>
 
-<div class="box">
+<div class="box1000">
 	<?php $this->load->view(THEME.'/slider_left');?>
 
 	<div class="space_box">
@@ -30,7 +29,7 @@
 			</tr>
 			<tr>
 				<th></th>
-				<td><a href="<?=site_url()?>">Apply to be an author for YouShelf ></a></td>
+				<td><a href="<?=site_url('user/apply_author')?>" class="applyAuthor">Apply to be an author for YouShelf ></a></td>
 			</tr>			
 			<tr>
 				<th></th>
@@ -41,3 +40,25 @@
 		</table>
 	</div>
 </div>
+
+<script type="text/javascript" src="common/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="common/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript">
+	var obj;
+	$(function() {
+		$(".applyAuthor").fancybox({
+			'width'				: 540,
+			'height'			: 400,
+			'padding'			: 2,
+			'type'				: 'iframe',
+			'centerOnScroll'	: true,
+			'overlayOpacity'	: 0
+		});		
+
+	})
+
+	function callback(url) {
+		$.fancybox.close();
+		if(url) window.location.href="<?=site_url('')?>";
+	}
+</script>
