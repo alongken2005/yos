@@ -4,21 +4,30 @@
 .star { overflow: hidden; zoom: 1; }
 .base #star, .star span { float: left; }
 .star span { height: 22px; line-height: 22px; }
+.base { position: relative; }
 .base .title { font-size: 18px; font-weight: 600; }
 .base li { margin-bottom: 10px; }
-.book_detail .tab { border-left: 1px solid #94C025; overflow: hidden; zoom:1; }
-.book_detail .tab a { float: left; font-size: 14px; color: #FFF; height: 35px; line-height: 35px; padding: 0 25px; border: 1px solid #94C025; border-left: none; border-bottom: none; background: #A5D62D; }
-.book_detail .tab a:hover, .book_detail .tab .active { color: #FFF; background: #94C025;; }
-.book_info h3 { border-top: 1px solid #94C025; padding-left: 10px; font-size: 20px; font-weight: normal; height: 35px; line-height: 35px; }
+.base .fav a { color: #0098CA; font-size: 14px; font-weight: bold; margin-right: 20px; }
+.book_detail .tab { overflow: hidden; zoom:1; margin-bottom: -1px; }
+.book_detail .tab a { float: left; font-size: 14px; color: #939393; height: 35px; line-height: 35px; padding: 0 25px; border-bottom: none; }
+.book_detail .tab .active { color: #0D76AB; background: #FFF; border: 1px solid #63B3D6; border-bottom: none; }
+.moreDes { color: #0098CA; }
+.base .bookShare { position: absolute; right: 0; top: 51px; }
+.base .homebtn { position: absolute; right: 0; top: 5px; }
+.base .homebtn a { font-weight: 600; font-size: 20px; padding: 6px 16px; }
+
+
+.book_info h3 { border-top: 1px solid #63B3D6; color: #666; font-size: 18px; font-weight: normal; height: 35px; line-height: 35px; }
 .book_info .star { margin-bottom: 10px; }
+.book_info .description { padding: 0 10px 10px 10px; }
 .startfloat h3 { padding-bottom: 10px; }
 .startfloat div { margin-bottom: 5px; }
-.star_0, .star_1, .star_2, .star_3, .star_4, .star_5 { float: left; width: 115px; height: 22px; background-image: url(../images/starts.png); background-repeat: no-repeat; } 
-.star_0 { background-position: 0 -110px; }
-.star_1 { background-position: 0 -88px; }
-.star_2 { background-position: 0 -66px; }
-.star_3 { background-position: 0 -44px; }
-.star_4 { background-position: 0 -22px; }
+.star_0, .star_1, .star_2, .star_3, .star_4, .star_5 { float: left; width: 110px; height: 21px; background-image: url(../images/stars.png); background-repeat: no-repeat; } 
+.star_0 { background-position: 0 -105px; }
+.star_1 { background-position: 0 -84px; }
+.star_2 { background-position: 0 -63px; }
+.star_3 { background-position: 0 -42px; }
+.star_4 { background-position: 0 -21px; }
 .star_5 { background-position: 0 0; }
 .star_list { float: left; width: 300px; }
 .writeReview { float: left; }
@@ -31,7 +40,11 @@
 .reviewList .helpful { background: url(../images/helpful.png) no-repeat; }
 .reviewList .unhelpful { background: url(../images/unhelpful.png) no-repeat; }
 
+#writeReview { font-size: 14px; color: #149EFE; margin-left: 50px; }
+
 .search_title { font-size: 18px; font-weight: 600; }
 .search_list { overflow: hidden; zoom: 1; }
 .search_list li { float: left; margin-right: 18px; margin-top: 15px; }
 .search_list li img { width: 182px; height: 260px; }
+.twitter { float: left; margin-bottom: 5px; width: 24px; height: 24px; background: url(../images/twitter.png) no-repeat; }
+.fbook { float: left; margin-bottom: 5px; width: 24px; height: 24px; background: url(../images/fbook.png) no-repeat; margin-right: 10px; }

@@ -15,7 +15,7 @@ class Type extends CI_Controller
 
 		$this->_data['thisClass'] = __CLASS__;
 		$this->load->model('base_mdl', 'base');
-		$this->_data['kinds'] = array('video'=>'视频','stuff'=>'教案');
+		$this->_data['ctype'] = $this->config->item('ctype');
 		$this->permission->power_check();
     }
 
@@ -31,7 +31,7 @@ class Type extends CI_Controller
     */
     public function lists () {
 
-		$this->_data['lists'] = $this->base->get_data('type')->result_array();
+		$this->_data['lists'] = $this->base->get_data('type', array(), '*', 0, 0, 'dis ASC')->result_array();
         $this->load->view('admin/type_list', $this->_data);
     }
 
@@ -41,19 +41,20 @@ class Type extends CI_Controller
     public function op () {
     	//验证表单规则
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', '名称', 'required|trim');
+		$this->form_validation->set_rules('name', '分类名称', 'required|trim');
 		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
 
 		if ($this->form_validation->run() == FALSE) {
 
 			if ($id = $this->input->get('id')) {
-				$this->_data['content'] = $this->base->get_data('type', array('id' => $id))->row_array();
+				$this->_data['row'] = $this->base->get_data('type', array('id' => $id))->row_array();
 			}
 			$this->load->view('admin/type_op', $this->_data);
 		} else {
 			$deal_data = array(
 				'name' 	=> $this->input->post('name'),
 				'type'	=> $this->input->post('type'),
+				'dis'	=> $this->input->post('dis'),
 			);
 
 			if ($id = $this->input->get('id')) {

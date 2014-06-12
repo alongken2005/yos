@@ -12,7 +12,7 @@ class Adminer extends CI_Controller
     public function __construct()
     {
 		parent::__construct();
-		
+
 		$this->_data['thisClass'] = __CLASS__;
 		$this->load->model('adminer_mdl', 'adminer');
 		$this->load->model('base_mdl', 'base');
@@ -30,7 +30,7 @@ class Adminer extends CI_Controller
     /**
     * @deprecated 管理员列表
     */
-    public function adminer_list ()
+    public function lists ()
     {
     	$this->_data['lists'] = $this->base->get_data('adminer')->result_array();
         $this->load->view('admin/adminer_list', $this->_data);
@@ -39,7 +39,7 @@ class Adminer extends CI_Controller
     /**
     * @deprecated 管理员添加，修改
     */
-    public function adminer_op ()
+    public function op ()
     {
     	//验证表单规则
 		$this->load->library('form_validation');
@@ -66,11 +66,11 @@ class Adminer extends CI_Controller
 			{
 				if ($this->base->update_data('adminer', array('uid' => $id), $insert_data))
 				{
-					$this->msg->showmessage('更新成功', site_url('admin/adminer/adminer_op?uid='.$id));
+					$this->msg->showmessage('更新成功', site_url('admin/adminer/op?uid='.$id));
 				}
 				else
 				{
-					$this->msg->showmessage('更新失败', site_url('admin/adminer/adminer_op?uid='.$id));
+					$this->msg->showmessage('更新失败', site_url('admin/adminer/op?uid='.$id));
 				}
 			}
 			else
@@ -79,11 +79,11 @@ class Adminer extends CI_Controller
 
 				if ($this->base->insert_data('adminer', $insert_data))
 				{
-					$this->msg->showmessage('添加成功', site_url('admin/adminer/adminer_list'));
+					$this->msg->showmessage('添加成功', site_url('admin/adminer/lists'));
 				}
 				else
 				{
-					$this->msg->showmessage('添加失败', site_url('admin/adminer/adminer_op'));
+					$this->msg->showmessage('添加失败', site_url('admin/adminer/op'));
 				}
 			}
 

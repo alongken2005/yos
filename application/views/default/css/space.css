@@ -1,30 +1,104 @@
-.slider_left { float: left; width: 230px; background: #FFF; padding: 10px 0 20px 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
-.slider_left li { height: 30px; line-height: 30px; padding: 0 15px; }
-.slider_left li:hover { background: #333; }
-.slider_left li:hover a { color: #FFF; }
-.slider_left .active { background: #333; }
-.slider_left .active a { color: #FFF; }
-.slider_left a { color: #333; font-size: 16px; }
-.slider_left .sec_level { float: left; }
+.box1000 { box-shadow: 0px 2px 4px 2px #888; padding-bottom: 10px; overflow: hidden; zoom: 1; background: #FFF; }
+.slider_left { float: left; width: 230px; padding: 20px 0 20px 0; }
+.slider_left li { overflow: hidden; zoom: 1; list-style-type: none; padding: 0 15px; clear: both; }
+.slider_left a:hover, .slider_left .active a { color: #0098CA; }
+.slider_left a { display: block; color: #333; font-size: 14px; text-decoration: none; }
+.slider_left .first_level { padding: 5px 0 5px 10px; font-weight: bold; font-size: 18px; }
+.slider_left .sec_level { padding: 5px 0; float: left; }
 .space_box { float: right; width: 750px; }
 .space_box h2 { font-size: 20px; }
+.space_box .h { margin-bottom: 15px; overflow: hidden; zoom: 1; }
+.space_box .h h3 { float: left; padding-top: 14px; margin-right: 10px; font-size: 18px; color: #333; }
+.space_box .leader { padding: 8px; background-color: #F3F3F3; margin-bottom: 15px; }
+
+.paytool, .selectMoney { padding: 30px 0; overflow: hidden; zoom: 1; }
+.paytool li, .selectMoney li { float: left; text-align: center; margin-right: 30px; }
+.paytool a, .selectMoney a { display: block; margin-bottom: 10px; border-radius: 5px; text-align: center; width: 100px; height: 60px; font-size: 20px; font-weight: 600; border: 1px solid #CCC; } 
+.selectMoney a { line-height: 60px; }
+.paytool .active, .selectMoney .active { background-color: #008CC6; color: #FFF; border: 1px solid #0079B4; } 
+.deposit { font-size: 16px; margin-top: 25px; }
+.deposit b { font-size: 16px; font-weight: normal; margin-top: 25px; color: #0098CA; }
+
+.cardTable { float: left; width: 400px; }
+.cardTable th { width: 140px; height: 30px; text-align: right; }
+.yourorder { float: left; min-width: 180px; background-color: #F3F3F3; }
+.yourorder h3 { line-height: 30px; border-bottom: 1px solid #FFF; padding-left: 10px; font-size: 16px; }
+.yourorder h4 { line-height: 30px; border-bottom: 1px solid #FFF; padding: 0 10px; font-weight: normal; font-size: 14px; }
+.yourorder span { float: right; }
 
 .book_edit_table { margin-top: 10px; width: 100%; }
 .book_edit_table th { width: 150px; text-align: right; font-size: 16px; padding-right: 10px; font-weight: normal; }
 .book_edit_table textarea { width: 320px; height: 80px; background: #F7F7F7; border: 1px solid #DBDBDB; }
-.book_step { height: 40px; background: #EEE; }
-.book_step a { float: left; width: 250px; height: 40px; line-height: 40px; color: #333; font-size: 20px; font-weight: 600; text-align: center; }
-.book_step .step { background: #333; color: #FFF; }
+.book_edit_table .covered li { float: left; margin-right: 14px; }
+.book_edit_table .covered li img { width: 125px; border: 1px solid #CCC;}
+.applyAuthor { font-size: 14px; font-weight: bold; margin-left: 15px; color: #0098CA; }
+.book_step { overflow: hidden; zoom: 1; padding-left: 150px; margin-bottom: -1px; }
+.book_step a { float: left; padding: 5px 15px; margin-bottom: -1px; color: #999; font-size: 18px; font-weight: 600; text-align: center; }
+.book_step .step { border: 1px solid #63B3D6; background-color: #FFF; border-bottom: none; color: #0098CA; }
+.book_step_bottom { border-top: 1px solid #63B3D6; }
 
 .book_list_table { width: 100%; margin-top: 10px; }
-.book_list_table a { color: #4464FB; }
-.book_list_table th { background: #F3F3F3; color: #666; font-weight: normal; padding: 10px 8px; text-align: left; border-top: 1px solid #EEE; border-bottom: 1px solid #EEE; }
-.book_list_table td { padding: 10px 8px; border-bottom: 1px solid #F1F1F1; }
-.viewlist { float: right; margin-top: 22px; width: 15px; height: 13px; background: url(../images/listview.png) no-repeat; }
-.viewgrid { float: right; margin: 22px 0 0 10px; width: 15px; height: 13px; background: url(../images/listview.png) -30px 0 no-repeat; }
-.chapter_table { width: 100%; margin-top: 10px; }
-.chapter_table th { background: #F3F3F3; color: #666; font-weight: normal; font-size: 12px; padding: 10px 8px; text-align: left; border-top: 1px solid #EEE; border-bottom: 1px solid #EEE; }
+.book_list_table a { color: #0098CA; }
+.book_list_table th { background: #F3F3F3; color: #666; font-size: 16px; font-weight: normal; padding: 10px 8px; text-align: left; border-top: 1px solid #EEE; border-bottom: 1px solid #EEE; }
+.book_list_table td { padding: 10px 8px; border-bottom: 1px solid #F1F1F1; font-size: 13px; }
+.viewlist { float: left; margin-top: 20px; width: 15px; height: 13px; background: url(../images/listview.png) no-repeat; }
+.viewgrid { float: left; margin: 20px 10px 0 10px; width: 15px; height: 13px; background: url(../images/listview.png) -30px 0 no-repeat; }
+.grid li { float: left; margin: 10px 36px 10px 0; }
+.grid li img { width: 150px; height: 210px; }
+.grid li div { width: 150px; height: 25px; line-height: 25px; font-size: 14px; font-weight: 600; color: #0098CA; overflow: hidden; }
+.grid li div a { color: #0098CA; }
+.chapter_table { background: #F3F3F3; color: #666; margin-top: 10px; overflow: hidden; }
+.chapter_table div { float: left; padding: 10px 8px; }
+.chapter_table .sequence { width: 120px; }
+.chapter_table .name { width: 430px; }
+.chapter_table .pagenum { width: 150px; }
+.chapter_table th { background: #F3F3F3; color: #666; text-align: left; font-weight: normal; font-size: 12px; padding: 10px 8px; border-top: 1px solid #EEE; border-bottom: 1px solid #EEE; }
 .chapter_table td { padding: 10px 8px; border-bottom: 1px solid #F1F1F1; }
+.editChapter { color: #0098CA; font-size: 14px; font-weight: bold; }
+.preview { color: #0098CA; margin-right: 10px; float: right; font-size: 14px; font-weight: bold; }
+.adCpForm { margin-top: 10px; }
+.adCpForm h3 { font-size: 14px; margin-top: 10px; }
+.adCpForm .tr { overflow: hidden; border-bottom: 1px solid #F1F1F1; }
+.adCpForm .tr div { float: left; padding: 10px 8px; }
+.adCpForm .tr .sqValue { width: 120px; font-weight: bold; height: 32px; line-height: 32px; }
+.adCpForm .tr .nameValue { width: 430px; }
+.adCpForm .tr .pageValue { width: 150px; }
+.adCpForm .up { padding-top: 5px; }
+.adCpForm .up .btn1 { margin-left: 65px; }
+.author_des { font-size: 14px; color: #0098CA; margin-top: 15px; }
+.pdfList { margin-top: 10px; }
+
+.audioFrom { margin-top: 20px; }
+.audioLi { margin-top: 20px; }
+
+#chapterForm h2 { padding: 8px 10px; background-color: #0098CA;; color: #FFF; font-size: 18px; }
+#chapterForm form { padding: 10px; background-color: #F2F2F2; }
+#chapterForm th { text-align: right; }
 
 .float_box { width: 500px; padding: 20px; }
-.scrollstep { width: 480px; height: 200px; font-size: 14px; padding: 10px;  border: 1px solid #CCC; background: #FFF; overflow-y: auto; margin: 20px 0;  }
+.scrollstep { height: 200px; font-size: 14px; padding: 10px;  border: 1px solid #CCC; background: #FFF; overflow-y: auto; margin: 20px 20px 15px 0;  }
+.scrollstep h3 { text-align: center; margin-bottom: 10px; }
+.scrollstep .p { padding-left: 25px; margin-top: 20px; line-height: 1.5; overflow: hidden; }
+.scrollstep .p em { float: left; font-style: normal; }
+.scrollstep .p span { float: left; width: 650px; }
+
+.sales_list_table { width: 98%; border-collapse: collapse; margin-top: 10px; }
+.sales_list_table th { text-align: left; padding: 5px 10px; font-size: 12px; background-color: #F3F3F3; border: 1px solid #DBDBDB; }
+.sales_list_table td { text-align: left; padding: 5px; border: 1px solid #DBDBDB; }
+.salesForm input { float: left; margin-bottom: 10px; }
+.Wdate { width: 130px; height: 24px; line-height: 24px; border: 1px solid #DBDBDB; padding-left: 5px; }
+
+.paybox { background: #54637C; padding: 3px; border-radius: 5px; }
+.paybox h2 { height: 35px; line-height: 35px; cursor: pointer; font-weight: normal; font-size: 16px; padding-left: 10px; color: #FFF; }
+.paybox h2 span { float: right; margin-right: 10px; }
+.paybox .detail { background: #FFF; display: none; }
+.paybox .detail th { text-align: left; padding: 5px; border-bottom: 1px solid #CCC; }
+.paybox .detail td { padding: 5px; }
+.reportBox { clear: both; border: 1px solid #EDEDED; padding: 5px; background: #F3F3F3; margin-right: 10px; border-top-right-radius: 5px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
+.reportTab .tab { font-size: 16px; font-weight: bold; float: left; padding: 0 20px; height: 36px; line-height: 36px; border: 1px solid #EDEDED; border-bottom: none; border-top-right-radius: 5px; border-top-left-radius: 5px; background-color: #F3F3F3; margin-bottom: -1px; }
+.reportTab .sel  { float: right; margin-right: 10px; margin-top: 5px; border-left: 1px solid #EDEDED; }
+.reportTab .sel a { float: left; border: 1px solid #E3E3E3; border-left: none; padding: 3px 8px; }
+.reportTab .sel a:hover, .reportTab .sel .act { background-color: #53637D; color: #FFF; }
+
+.selectedBtn { display: block; color: #0098CA; margin-top: 10px; }
+

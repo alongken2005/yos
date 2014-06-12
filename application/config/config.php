@@ -1,7 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //基础url
-$config['base_url']	= 'http://www.yos.com/';
-//$config['base_url']	= 'http://yos.childroad.cn/';
+$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/';
 
 //当前皮肤主题
 define('THEME', 'default');
@@ -23,7 +22,7 @@ define('THEME_VIEW', $config['base_url'].APPPATH.'views/'.THEME.'/');
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

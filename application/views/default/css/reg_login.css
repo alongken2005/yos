@@ -13,3 +13,6 @@
 .login_box label, .reg_box label { color: #666; font-weight: 600; font-size: 13px; margin-bottom: 5px; float: left; }
 .login_box label.dan { color: #999; font-weight: normal; font-size: 13px; margin-bottom: 5px; display: block; }
 .login_box .login_submit { float: left; height: 48px; width: 306px; margin-bottom: 15px; background: url(../images/login_submit.png) no-repeat center; border: none; text-indent: -999px; cursor: pointer; }
+
+.facebookLogin { display: inline; padding: 3px 5px 3px 3px; margin-top: 5px; margin-left: 10px; background-color: #3E5B9D; background-repeat: no-repeat; color: #FFF; border-radius: 3px; }
+.facebookLogin:hover { color: #FFF; }

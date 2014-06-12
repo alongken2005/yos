@@ -13,11 +13,9 @@ class Content extends CI_Controller
     {
 		parent::__construct();
 
-		$this->_data['thisClass'] = __CLASS__;
 		$this->load->model('base_mdl', 'base');
-		$this->config->load('common', TRUE);
 		$this->permission->power_check();
-		$this->_data['contType'] = $this->config->item('contType', 'common');
+		$this->_data['ctype'] = $this->config->item('ctype');
     }
 
     /**
@@ -31,17 +29,10 @@ class Content extends CI_Controller
     * @deprecated 文章管理
     */
     public function lists () {
-		$tid = $this->_data['tid'] = (int)$this->input->get('tid');
 
-		$where = array();
-		if($tid) {
-			$where['tid'] = $tid;
-		} else {
-			$where['tid !='] = 2;
-		}
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('content', $where)->num_rows();
+		$total_num = $this->base->get_data('content')->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -49,10 +40,15 @@ class Content extends CI_Controller
 		$this->gpagination->currentPage($page);
 		$this->gpagination->items($total_num);
 		$this->gpagination->limit($limit);
-		$this->gpagination->target(site_url('admin/content/content?tid='.$tid));
+		$this->gpagination->target(site_url('admin/content/content'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('content', $where, '*', $limit, $offset, 'sort DESC, cid DESC')->result_array();
+		$this->_data['lists'] = $this->base->get_data('content', array(), '*', $limit, $offset, 'dis ASC, id DESC')->result_array();
+		$typeList = $this->base->get_data('type')->result_array();
+		foreach($typeList as $v) {
+			$tList[$v['id']] = array('name'=>$v['name'], 'type'=>$v['type']); 
+		}
+		$this->_data['typeList'] = $tList;
         $this->load->view('admin/content_list', $this->_data);
     }
 
@@ -67,8 +63,12 @@ class Content extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
 
 		if ($this->form_validation->run() == FALSE) {
-			if ($id = $this->input->get_post('cid')) {
-				$this->_data['content'] = $this->base->get_data('content', array('cid' => $id))->row_array();
+			if ($id = $this->input->get_post('id')) {
+				$this->_data['row'] = $row = $this->base->get_data('content', array('id' => $id))->row_array();
+				$type = $this->base->get_data('type', array('id'=>$row['tid']), 'type')->row_array();
+
+				$this->_data['selectedType'] = $type['type'];
+
 			}
 			$this->load->view('admin/content_op', $this->_data);
 		} else {
@@ -78,34 +78,45 @@ class Content extends CI_Controller
 				'title'			=> $this->input->post('title'),
 				'tid'			=> $this->input->post('tid'),
 				'ctime'			=> strtotime($this->input->post('ctime')),
-				'sort'			=> $this->input->post('sort')
+				'dis'			=> $this->input->post('dis')
 			);
 
-			if ($id = $this->input->get('cid')) {
-				if ($this->base->update_data('content', array('cid' => $id), $deal_data)) {
-					$this->msg->showmessage('更新成功', site_url('admin/content/op?cid='.$id));
-				} else {
-					$this->msg->showmessage('更新失败', site_url('admin/content/op?cid='.$id));
-				}
+			if ($id = $this->input->get('id')) {
+				$this->base->update_data('content', array('id' => $id), $deal_data);
+				$this->msg->showmessage('更新成功', site_url('admin/content/lists'));
 			} else {
-				if ($this->base->insert_data('content', $deal_data)) {
-					$this->msg->showmessage('添加成功', site_url('admin/content/lists?tid='.$this->input->post('tid')));
-				} else {
-					$this->msg->showmessage('添加失败', site_url('admin/content/op?tid='.$this->input->post('tid')));
-				}
+				$this->base->insert_data('content', $deal_data);
+				$this->msg->showmessage('添加成功', site_url('admin/content/lists'));
 			}
 		}
     }
 
     /**
-    * @deprecated 文章删除
+    * 文章删除
     */
     public function del () {
-        $id = intval($this->input->get('cid'));
-        if($id && $this->base->del_data('content', array('cid' => $id))) {
+        $id = intval($this->input->get('id'));
+        if($id && $this->base->del_data('content', array('id' => $id))) {
         	exit('ok');
         } else {
         	exit('no');
         }
+    }
+
+
+    public function getType() {
+    	$type = $this->input->get('type');
+    	$tid = $this->input->get('tid');
+
+    	$typeList = $this->base->get_data('type', array('type'=>$type))->result_array();
+    	$op = "";
+    	foreach($typeList as $v) {
+    		$selected = $tid == $v['id'] ? 'selected' : '';
+    		$op .= "<option value='".$v['id']."' ".$selected.">".$v['name']."</option>";
+    	}
+
+    	echo $op;
+    	exit;
+
     }
 }
