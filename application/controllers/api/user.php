@@ -28,6 +28,9 @@ class User extends CI_Controller {
 			output(1008, lang('login_first'));
 		} else {
 			$user = json_decode(authcode($_COOKIE['user']), true);
+			$acount = $this->base->get_data('account', array('uid'=>$user['uid']))->row_array();
+			$user['deposit'] = $acount['deposit'];
+			$user['payUrl'] = site_url('pay');
 			output(1, $user);
 		}
 	}
