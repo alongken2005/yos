@@ -97,12 +97,12 @@ function secfmt($seconds) {
  * 验证签名
  */
 function getSign($action, $random, $sign) {
-	if(!$random) output(3002, '随机数不能为空');
-	if(!$sign) output(3001, '验证字符串错误');
+	if(!$random) output(3002, lang('field_empty'));
+	if(!$sign) output(3001, lang('sign_error'));
 
 	$signPostfix = config_item('signPostfix');
 	$sign2 = strtoupper(md5($action.$random.$signPostfix));
-	if($sign != $sign2) output(3003, '验证失败');
+	if($sign != $sign2) output(3003, lang('verification_failed'));
 }
 
 /**
@@ -139,4 +139,13 @@ function wordCount($str = ""){
 	$chinese_pattern = "/[\x{4e00}-\x{9fff}\x{f900}-\x{faff}]/u";
     $str = preg_replace("/[\x{ff00}-\x{ffef}\x{2000}-\x{206F}]/u", "", $str);
     return preg_match_all($chinese_pattern, $str, $match) + str_word_count(preg_replace($chinese_pattern, "", $str));
+}
+
+
+function getCover($v) {
+	if($v['cover']) {
+		return 'http://'.$_SERVER['HTTP_HOST'].'/data/books/'.$v['cover'];
+	} else if($v['covered'] > 0) {
+		return 'http://'.$_SERVER['HTTP_HOST'].'/data/books/cover'.$v['covered'].'.jpg';
+	}
 }

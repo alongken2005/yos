@@ -49,7 +49,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 /*
-$db['default']['hostname'] = '58.221.47.226';
+$db['default']['hostname'] = '208.78.246.82';
 $db['default']['username'] = 'cliuser';
 $db['default']['password'] = 'croad_jml';
 */

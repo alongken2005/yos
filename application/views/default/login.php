@@ -18,19 +18,20 @@
 			<tr>
 				<th>Password:</th>
 				<td><input type="password" name="password" class="input5"></td>
-			</tr>
+			</tr>			
 			<tr>
 				<th></th>
 				<td>
-					<label class="dan"><input type="checkbox" name=""/> 记住我的账户：</label>
-					<a class="fgpwd" href="<?=site_url()?>">忘记密码？</a>
+					<label class="dan"><input type="checkbox" name=""/> Automatic log in on this computer</label>
+					<!--a class="fgpwd" href="<?=site_url()?>">Forgot password?</a-->
 				</td>
 			</tr>
 			<tr>
 				<th></th>
 				<td>
-					<input type="submit" value="Sign In" class="btn1">
+					<input type="submit" value="Sign In" class="btn1 left">
 					<input type="hidden" value="<?=site_url('user/redirect')?>" class="direct_url">
+					<a href="<?=site_url('user/fLogin')?>" class="facebookLogin left"><img src="<?=THEME_VIEW?>images/facebook.png" width="16" class="left"/><span style="float:left; padding-left:5px; line-height:16px">Sign In</span></a>
 				</td>
 			</tr>
 			<tr>
@@ -45,9 +46,9 @@
 		$('.btn1').click(function() {
 			$.post($('.login_box').attr('action'), $('.login_box').serialize(), function(data) {
 				if(data.state != 1) {
-					$('.login_box .error').removeClass('ok').html(data.msg).fadeIn("fast").delay(2000).fadeOut();
+					$('.login_box .error').removeClass('ok').html(data.msg).fadeIn("fast");
 				} else {
-					$('.login_box .error').addClass('ok').html(data.msg).fadeIn("fast").delay(2000).fadeOut();
+					$('.login_box .error').addClass('ok').html(data.msg).fadeIn("fast");
 					window.location.href = $('.login_box .direct_url').val();
 				}
 			}, 'json');

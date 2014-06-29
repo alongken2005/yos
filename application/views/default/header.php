@@ -12,20 +12,18 @@
 <body>
 	<div class="header_fix"></div>
 	<div class="header_box">
-		<a href="<?=site_url()?>" class="logo"></a>
-	
+		<a href="<?=site_url()?>" class="logo"><img src="<?=THEME_VIEW?>images/logo.png"/></a>
+		<div class="sv"></div>
 		<div class="home_header">
 		<?php
 		    if($user = get_cookie('user')) {
 			    $user = json_decode(authcode($user), true);
 		?>
-			<a href="<?=site_url('user/info')?>" class="header_pic"><img src="<?=THEME_VIEW?>images/noheader.jpg"/></a>
-			<!--a href="<?=site_url('user/loginout')?>" class="username">退出</a-->
+			<a href="<?=site_url('user/info')?>" class="header_pic"><img src="<?=THEME_VIEW?>images/noheader.png"/></a>
 			<a href="<?=site_url('user/info')?>" class="username"><?=$user['username']?></a>
-			
 		<?php } else {?>
-			<a href="<?=site_url('user/reg')?>" class="username">注册</a>
-			<a href="<?=site_url('user/login')?>" class="username">登陆</a>
+			<a href="<?=site_url('user/reg')?>" class="reg_log">Sign Up</a>
+			<a href="<?=site_url('user/login')?>" class="reg_log">Sign In</a>
 		<?php } ?>
 
 		</div>
@@ -35,21 +33,22 @@
 		</form>			
 		<div class="header_menu">
 			<div class="menu">
-				<a href="<?=site_url('search/clists')?>">Genres</a>
-				<a href="<?=site_url('search/clists?genre=1')?>">Adventure</a>
-				<a href="<?=site_url('search/clists?genre=2')?>">Biography</a>
-				<a href="<?=site_url('search/clists?genre=3')?>">Business</a>
-				<a href="<?=site_url('search/clists?genre=7')?>">Fantasy</a>
-				<a href="<?=site_url('search/clists?genre=4')?>">Kids & Famay</a>
-				<a href="<?=site_url('search/clists?genre=16')?>">Romance</a>
-				<a href="<?=site_url('search/clists?genre=17')?>">Sci-Fi</a>
+			<?php if(!(isset($nothome) && $nothome)) { ?>
+				<a href="<?=site_url()?>" style="padding-bottom: 5px">Home</a>
+			<?php } 
+			$result = $this->base->get_data('book_genre', array(), '*', 0, 0, 'dis ASC')->result_array();
+			?>
+				<a href="javascript:void(0)" class="t">Genres</a>
+			<?php foreach($result as $v) { ?>	
+				<a href="<?=site_url('search/clists?genre='.$v['id'])?>"><?=$v['name']?></a>
+			<?php } ?>
 			</div>
-			<a class="browse m" href="<?=site_url()?>">Home</a>	
+			<a class="browse m" href="<?=site_url()?>">Browse</a>	
 		<?php
 		if(isset($menu_list) && $menu_list) {
-			foreach($menu_list as $v) {
+			foreach($menu_list as $k=>$v) {
 		?>
-			<a class="m" href="<?=site_url()?>"><?=$v?></a>	
+			<a class="m gomenu" rel="<?=$k?>" href="<?=site_url().'#'.$k?>"><?=$v?></a>	
 		<?php		
 			}
 		}	
@@ -63,16 +62,32 @@
 	</div>
 	<script type="text/javascript">
 		$(function() {
+			$('.gomenu').click(function() {
+				$('html,body').animate({scrollTop: $('#'+$(this).attr('rel')).offset().top-95}, 500);
+			})
+			
+
 			$('.user_menu').css('width', $('.home_header').width());
 
+			$('.browse').hover(function() {
+
+				var offset = $(this).position();
+				$('.menu').css({ "left": parseInt(offset.left+14)+"px", "top": parseInt(offset.top+48)+"px" }).show();
+				//$('.menu').show();
+			})
+
+			$(window).click(function() {
+				$('.menu').hide();
+			})
+			/*
 			$('.browse').powerFloat({
 				eventType: "hover",
 				targetMode: "other",
 				target: $('.menu'),
 				offsets: {x: 14, y: -20},
-			});
+			});*/
 
-		<?php if($user) { ?>
+		<?php if(isset($user) && $user) { ?>
 			$('.home_header').powerFloat({
 				eventType: "hover",
 				targetMode: "other",

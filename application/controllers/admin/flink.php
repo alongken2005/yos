@@ -22,14 +22,15 @@ class Flink extends CI_Controller
     */
     public function index ()
     {
-        self::flink();
+        self::lists();
     }
 
     /**
     * @deprecated 友情链接管理
     */
-    public function flink ()
+    public function lists ()
     {
+
 		$this->_data['lists'] = $this->base->get_data('flink')->result_array();
         $this->load->view('admin/flink_list', $this->_data);
 
@@ -38,10 +39,10 @@ class Flink extends CI_Controller
     /**
     * @deprecated 友情链接处理
     */
-    public function flink_op ()
+    public function op ()
     {
     	$id = intval($this->input->get('fid'));
-		$link_path = './data/uploads/flink/';
+		$link_path = './data/uploads/pics/';
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('name', '链接名称', 'required|trim');
@@ -54,6 +55,7 @@ class Flink extends CI_Controller
 			}
 			$this->load->view('admin/flink_op', $this->_data);
 		} else {
+
 			if($_FILES['userfile']['size'] > 0) {
 				$config['upload_path']		= $link_path;
 				$config['allowed_types']	= 'gif|jpg|png';
@@ -81,9 +83,9 @@ class Flink extends CI_Controller
 			if(!$id) {
 				$link_data['picfile'] = isset($upload_data['file_name']) ? $upload_data['file_name'] : '';
 				if($this->base->insert_data('flink', $link_data)) {
-					$this->msg->showmessage('添加成功', site_url('admin/flink/flink'));
+					$this->msg->showmessage('添加成功', site_url('admin/flink/lists'));
 				} else {
-					$this->msg->showmessage('添加失败', site_url('admin/flink/flink_op'));
+					$this->msg->showmessage('添加失败', site_url('admin/flink/op'));
 				}
 			} else {
 				if($_FILES['userfile']['size'] > 0) {
@@ -93,11 +95,11 @@ class Flink extends CI_Controller
 				}
 				if($this->base->update_data('flink', array('fid'=>$id), $link_data))
 				{
-					$this->msg->showmessage('修改成功', site_url('admin/flink/flink'));
+					$this->msg->showmessage('修改成功', site_url('admin/flink/lists'));
 				}
 				else
 				{
-					$this->msg->showmessage('修改失败', site_url('admin/flink/flink_op?fid='.$id));
+					$this->msg->showmessage('修改失败', site_url('admin/flink/op?fid='.$id));
 				}
 			}
 		}
@@ -106,7 +108,7 @@ class Flink extends CI_Controller
     /**
     * @deprecated 文章删除
     */
-    public function flink_del () {
+    public function del () {
         $id = intval($this->input->get('fid'));
         if($id && $this->base->del_data('flink', array('fid' => $id))) {
         	exit('ok');

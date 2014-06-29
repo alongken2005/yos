@@ -37,7 +37,7 @@ class Msg {
 			if($views) {
 				$view_url = $views;
 			} else {
-				$view_url = 'admin/showmessage';
+				$view_url = 'default/showmessage';
 			}
 			echo $CI->load->view($view_url, $data, true);
 			exit;

@@ -8,7 +8,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 				// 取值越大，密文变动规律越大，密文变化 = 16 的 $ckey_length 次方
 				// 当此值为 0 时，则不产生随机密钥
 
-	$key = md5($key ? $key : '1234567890');
+	$key = md5($key ? $key : '1WQwrhg67@#!%^&*890');
 	$keya = md5(substr($key, 0, 16));
 	$keyb = md5(substr($key, 16, 16));
 	$keyc = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length): substr(md5(microtime()), -$ckey_length)) : '';

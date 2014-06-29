@@ -56,7 +56,7 @@
 			</tr>			
 			<tr>
 				<th align="right">sign:</th>
-				<td><input type="text" name="sign" value="<?php echo gsign('getDirectory', $timestamp)?>" /></td>
+				<td><input type="text" name="sign" value="<?php echo gsign('getChapter', $timestamp)?>" /></td>
 			</tr>
 			<tr>
 				<th></th>
@@ -225,7 +225,40 @@ Some formal photo portraits still use black-and-white. Many visual-art photograp
 				<td><input type="submit" value="提交" /></td>
 			</tr>
 		</table>
-	</form>				
+	</form>	
+
+	<form action="<?=site_url('api/book/getReviews')?>" method="get" id="book_getReviews">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>获取书本评论</b></td>
+			</tr>	
+			<tr>
+				<th align="right">bookId:</th>
+				<td><input type="text" name="bookId" value="11" /></td>
+			</tr>								
+			<tr>
+				<th align="right">pageSize:</th>
+				<td><input type="text" name="pageSize" value="20" /></td>
+			</tr>
+			<tr>
+				<th align="right">page:</th>
+				<td><input type="text" name="page" value="1" /></td>
+			</tr>										
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('getReviews', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>					
 
 	<form action="<?=site_url('api/book/getScoreInfo')?>" method="post" id="book_getScoreInfo">
 		<table cellspacing="5" cellpadding="0">
@@ -285,6 +318,376 @@ Some formal photo portraits still use black-and-white. Many visual-art photograp
 		</table>
 	</form>		
 
+	<form action="<?=site_url('api/book/addFav')?>" method="post" id="book_addFav">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>收藏书本</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="9" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('addFav', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/book/delFav')?>" method="post" id="book_delFav">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>取消收藏</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="9" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('delFav', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>		
+
+
+	<form action="<?=site_url('api/book/getMyReview')?>" method="post" id="book_getMyReview">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>获取我对书本的评论</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="9" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('getMyReview', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+
+	<form action="<?=site_url('api/book/addNote')?>" method="post" id="book_addNote">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>添加笔记</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">章节id:</th>
+				<td><input type="text" name="chapterId" value="10" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">页码:</th>
+				<td><input type="text" name="page" value="9" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">笔记针对的文字:</th>
+				<td><input type="text" name="charContent" value="笔记针对的文字" /></td>
+			</tr>																																																								
+			<tr>
+				<th align="right">笔记文字在页码的起始字符数:</th>
+				<td><input type="text" name="charBegin" value="笔记文字在页码的起始字符数" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">笔记的内容:</th>
+				<td><input type="text" name="noteContent" value="笔记的内容" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">书签页20个字:</th>
+				<td><input type="text" name="content" value="书签页20个字" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('addNote', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/book/editNote')?>" method="post" id="book_editNote">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>修改笔记</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">笔记id:</th>
+				<td><input type="text" name="noteId" value="11" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">书签页20个字:</th>
+				<td><input type="text" name="content" value="书签页20个字" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('editNote', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/book/delNote')?>" method="post" id="book_delNote">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>删除笔记</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">笔记id:</th>
+				<td><input type="text" name="noteId" value="11" /></td>
+			</tr>																																																								
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('delNote', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>		
+
+	<form action="<?=site_url('api/book/getNote')?>" method="post" id="book_getNote">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>获取笔记列表</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('getNote', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/book/addBookmark')?>" method="post" id="book_addBookmark">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>添加书签</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																																																						
+			<tr>
+				<th align="right">章节id:</th>
+				<td><input type="text" name="chapterId" value="10" /></td>
+			</tr>																																																						
+			<tr>
+				<th align="right">页码:</th>
+				<td><input type="text" name="page" value="9" /></td>
+			</tr>																																																																																																															
+			<tr>
+				<th align="right">书签内容:</th>
+				<td><input type="text" name="content" value="书签页20个字" /></td>
+			</tr>																												
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('addBookmark', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/book/delBookmark')?>" method="post" id="book_delBookmark">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>删除书签</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																																																						
+			<tr>
+				<th align="right">书签id:</th>
+				<td><input type="text" name="bookmarkId" value="9" /></td>
+			</tr>																																																																																																																																											
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>	
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('delBookmark', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>			
+
+	<form action="<?=site_url('api/book/isPayPage')?>" method="post" id="book_isPayPage">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>判断此页是否需要付费</b></td>
+			</tr>	
+			<tr>
+				<th align="right">bookId:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">chapterId:</th>
+				<td><input type="text" name="chapterId" value="12" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">page:</th>
+				<td><input type="text" name="page" value="1" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('isPayPage', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/book/payPage')?>" method="post" id="book_payPage">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>支付单页</b></td>
+			</tr>	
+			<tr>
+				<th align="right">bookId:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">chapterId:</th>
+				<td><input type="text" name="chapterId" value="12" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">page:</th>
+				<td><input type="text" name="page" value="1" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('payPage', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/book/getBookmark')?>" method="post" id="book_getBookmark">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>获取书签列表</b></td>
+			</tr>	
+			<tr>
+				<th align="right">书本id:</th>
+				<td><input type="text" name="bookId" value="12" /></td>
+			</tr>																																																							
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>			
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('getBookmark', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
 	<form action="<?=site_url('api/user/login')?>" method="post" id="user_login">
 		<table cellspacing="5" cellpadding="0">
 			<tr>
@@ -306,6 +709,27 @@ Some formal photo portraits still use black-and-white. Many visual-art photograp
 			<tr>
 				<th align="right">sign:</th>
 				<td><input type="text" name="sign" value="<?php echo gsign('login', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>
+
+	<form action="<?=site_url('api/user/loginOut')?>" method="post" id="user_loginOut">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>退出登录</b></td>
+			</tr>
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>						
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('loginOut', $timestamp)?>" /></td>
 			</tr>
 			<tr>
 				<th></th>
@@ -343,6 +767,75 @@ Some formal photo portraits still use black-and-white. Many visual-art photograp
 			<tr>
 				<th align="right">sign:</th>
 				<td><input type="text" name="sign" value="<?php echo gsign('reg', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>	
+
+	<form action="<?=site_url('api/user/editInfo')?>" method="post" id="user_editInfo">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>修改用户信息</b></td>
+			</tr>	
+			<tr>
+				<th align="right">uid:</th>
+				<td><input type="text" name="uid" value="10" /></td>
+			</tr>			<tr>
+				<th align="right">username:</th>
+				<td><input type="text" name="username" value="zhanghao" /></td>
+			</tr>								
+			<tr>
+				<th align="right">oldPassword:</th>
+				<td><input type="text" name="oldPassword" value="dddddd" /></td>
+			</tr>			<tr>
+				<th align="right">newPassword:</th>
+				<td><input type="text" name="newPassword" value="dddddd" /></td>
+			</tr>
+			<tr>
+				<th align="right">confirmNewPassword:</th>
+				<td><input type="text" name="confirmNewPassword" value="dddddd" /></td>
+			</tr>			
+			<tr>
+				<th align="right">random:</th>
+				<td><input type="text" name="random" value="<?=$timestamp?>" /></td>
+			</tr>						
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo gsign('editInfo', $timestamp)?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>
+
+	<?php $sign = strtoupper(md5('facebookLogin12222232320zhanghaoalongken2005@qq.com!qaa$%^&*zxsw234edc$%^'))?>
+	<form action="<?=site_url('api/user/facebookLogin')?>" method="post" id="user_facebookLogin">
+		<table cellspacing="5" cellpadding="0">
+			<tr>
+				<th width="200"></th>
+				<td><b>facebook登陆</b></td>
+			</tr>	
+			<tr>
+				<th align="right">facebookId:</th>
+				<td><input type="text" name="facebookId" value="12222232320" /></td>
+			</tr>	
+			<tr>
+				<th align="right">username:</th>
+				<td><input type="text" name="username" value="zhanghao" /></td>
+			</tr>					
+			<tr>
+				<th align="right">email:</th>
+				<td><input type="text" name="email" value="alongken2005@qq.com" /></td>
+			</tr>															
+			<tr>
+				<th align="right">sign:</th>
+				<td><input type="text" name="sign" value="<?php echo $sign?>" /></td>
 			</tr>
 			<tr>
 				<th></th>

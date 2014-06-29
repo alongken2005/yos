@@ -50,64 +50,41 @@ class Msgs extends CI_Controller
     }
 
     /**
-    * @deprecated 文章处理
+    * 文章处理
     */
     public function op () {
     	//验证表单规则
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('reply', '邮件内容', 'required|trim');
-		$this->form_validation->set_rules('retitle', '邮件标题', 'required|trim');
+		$this->form_validation->set_rules('title', '标题', 'required|trim');
+		$this->form_validation->set_rules('name', '称呼', 'required|trim');
+		$this->form_validation->set_rules('content', '内容', 'required|trim');
 		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
+		$id = $this->input->get_post('id');
 
 		if ($this->form_validation->run() == FALSE) {
-			if ($id = $this->input->get_post('id')) {
-				$this->_data['row'] = $this->base->get_data('msg', array('id' => $id))->row_array();
-			}
+			$this->_data['row'] = $this->base->get_data('msg', array('id' => $id))->row_array();
 			$this->load->view('admin/msg_op', $this->_data);
 		} else {
-			$reply = $this->input->post('reply');
-			$retitle = $this->input->post('retitle');
 
-			if ($id = $this->input->get('id')) {
-				$row = $this->base->get_data('msg', array('id' => $id))->row_array();
-				$this->load->config('email');
-				$configemail = $this->config->item('smtp');
-				$this->load->library('email');
-
-				$this->email->initialize($configemail);
-				$this->email->from('hangzhouzetian@gmail.com', '杭州泽天科技有限公司');
-				$this->email->to($row['email']);
-				$this->email->subject($retitle);
-				$message_file = $this->load->view('email_demo', array('reply'=>$reply, 'msg'=>$row['msg']), TRUE);
-				$this->email->message($message_file);
-				if($this->email->send()) {
-					$deal_data = array(
-						'reply' 	=> $reply,
-						'retitle' 	=> $retitle,
-						'status' 	=> 1,
-						'rtime'		=> time(),
-					);
-					$this->base->update_data('msg', array('id' => $id), $deal_data);
-					$this->msg->showmessage('发送成功', site_url('admin/msgs/lists'));
-				} else {
-					$deal_data = array(
-						'reply' 	=> $reply,
-						'retitle' 	=> $retitle,
-						'rtime'		=> time(),
-					);
-					$this->base->update_data('msg', array('id' => $id), $deal_data);
-					$this->msg->showmessage('发送失败', site_url('admin/msgs/lists'));
-				}
-			}
+			$deal_data = array(
+				'name' 		=> $this->input->post('name'),
+				'title' 	=> $this->input->post('title'),
+				'email' 	=> $this->input->post('email'),
+				'content'	=> $this->input->post('content'),
+			);
+			$this->base->update_data('msg', array('id' => $id), $deal_data);
+			$this->msg->showmessage('修改成功', site_url('admin/msgs/lists'));
+				
 		}
     }
 
     /**
-    * @deprecated 文章删除
+    * 文章删除
     */
-    public function del () {
+    public function msgDel () {
         $id = intval($this->input->get('id'));
         if($id && $this->base->del_data('msg', array('id' => $id))) {
+        	$this->base->del_data('reply', array('mid' => $id));
         	exit('ok');
         } else {
         	exit('no');

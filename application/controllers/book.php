@@ -13,8 +13,10 @@ class Book extends MY_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('base_mdl', 'base');
-		
-		//$this->_user = $this->checkLogin();		
+		if($this->member) {
+			$this->_data['userInfo'] = $this->getUserInfo($this->member['uid']);
+		}
+			
 	}
 
 	/**
@@ -28,10 +30,11 @@ class Book extends MY_Controller {
 		$this->_data['view'] = $this->input->get('view') ? $this->input->get('view') : 'list';
 		//检查登陆状态
 		if(!$this->member) {
-			$this->msg->showmessage('请先登陆！', site_url('user/login'));
+			$this->msg->showmessage(lang('login_first'), site_url('user/login'));
 		}
 		
-		$this->_data['active'] = 'edit';
+		$this->_data['active'] = 'lists';
+		$this->_data['slider_left'] = $this->load->view(THEME.'/slider_left', $this->_data, true);
 		$this->_data['books'] = $this->base->get_data('book', array('uid'=>$this->member['uid']), '*', 0, 0, 'mtime DESC')->result_array();
 		$this->load->view(THEME.'/book_list', $this->_data);
 	}
@@ -42,9 +45,39 @@ class Book extends MY_Controller {
 	public function detail () {
 		$this->_data['do'] = $do = $this->input->get('do');
 		$this->_data['bid'] = $bid = intval($this->input->get('bid'));
-		$this->_data['book'] = $this->base->get_data('book', array('id'=>$bid))->row_array();
+		$this->_data['book'] = $book =  $this->base->get_data('book', array('id'=>$bid))->row_array();
+
+		$this->_data['addFav'] = '';
+		$this->_data['removeFav'] = 'no';
+		if($this->member) {
+			$myBook = $this->base->get_data('book', array('uid'=>$this->member['uid']), 'id')->result_array();
+			$bookIds = array();
+			if($myBook) {
+				foreach($myBook as $v) {
+					$bookIds[] = $v['id'];
+				}
+			}
+
+			if(in_array($bid, $bookIds)) {
+				$this->_data['addFav'] = 'no';
+				$this->_data['removeFav'] = 'no';				
+			}
+
+			$isfav = $this->base->get_data('book_fav', array('bid'=>$bid, 'uid'=>$this->member['uid']))->num_rows();
+
+
+			//收藏过，添加收藏隐藏
+			if($isfav > 0) {
+				$this->_data['addFav'] = 'no';
+				$this->_data['removeFav'] = '';
+			}
+		}
 
 		if($do == 'detail') {
+			$desLen = mb_strlen($book['description'], 'utf-8');
+			if($desLen > 500) {
+				$this->_data['more'] = true;
+			}
 			$this->_data['genre'] = $this->base->get_data('book_genre', array('id'=>$this->_data['book']['genre']))->row_array();
 		} else if($do == 'reviews') {
 			$scoreArray = $this->base->get_data('book_reviews', array('bid'=>$bid), 'score')->result_array();
@@ -130,12 +163,12 @@ class Book extends MY_Controller {
 	public function writeReview() {
 		//检查登陆状态
 		if(!$this->member) {
-			$this->msg->showmessage('请先登陆！', site_url('user/login'));
+			output(1008, lang('login_first'));
 		}
 
 		$bid = intval($this->input->post('bid')) ? intval($this->input->post('bid')) : 0;
 
-		if(!$bid) $this->msg->showmessage('bookid error', site_url());
+		if(!$bid) output(1006, lang('book_id_error'));
 
 		$insert_data = array(
 			'bid'		=> $bid,
@@ -153,14 +186,51 @@ class Book extends MY_Controller {
 			$avScore = floor($row['score']/$row['total']);
 			$this->base->update_data('book', array('id'=>$bid), array('score'=>$avScore, 'scorenum'=>$row['total']));			
 		}
-		$this->msg->showmessage('write success', site_url('book/detail?do=reviews&bid='.$bid));
+		output(1, lang('success'));
 	}
 
 	//评论点赞
 	public function helpful() {
 		$bid = $this->input->get('bid');
-
 	}
+
+	public function addFav() {
+
+		//检查登陆状态
+		if(!$this->member) output(1008, lang('login_first'));
+
+		$bid = intval($this->input->get('bid'));
+		if(!$bid) output(1006, lang('book_id_error'));
+
+		$num = $this->base->get_data('book_fav', array('uid'=>$this->member['uid'], 'bid'=>$bid))->num_rows();
+		if($num > 0) output(2206, lang('has_fav'));
+
+		$re = $this->base->insert_data('book_fav', array('uid'=>$this->member['uid'], 'bid'=>$bid, 'ctime'=>time()));
+		if($re) {
+			output(1, lang('success'));
+		} else {
+			output(2207, lang('fav_failed'));
+		}		
+	}
+
+	/**
+	 * 取消收藏
+	 */
+	public function delFav() {
+
+		//检查登陆状态
+		if(!$this->member) output(1008, lang('login_first'));
+		$bid = intval($this->input->get('bid'));
+		if(!$bid) output(1006, lang('book_id_error'));
+
+		$re = $this->base->del_data('book_fav', array('uid'=>$this->member['uid'], 'bid'=>$bid));
+		if($re) {
+			output(1, lang('success'));
+		} else {
+			output(100, lang('cancel_fav_failed'));
+		}
+	}	
+	
 	
 	/**
 	 * 书本编辑
@@ -169,12 +239,13 @@ class Book extends MY_Controller {
 	
 		//检查登陆状态
 		if(!$this->member) {
-			$this->msg->showmessage('请先登陆！', site_url('user/login'));
+			$this->msg->showmessage(lang('login_first'), site_url('user/login'));
 		}	
 		$uid 	= $this->member['uid'];
 		$id 	= intval($this->input->get('id'));
 		$step 	= $this->input->get('step');
 		$step 	= $step ? $step : 1;
+		$type = $this->input->get('type');
 
 		if($_POST) {
 
@@ -189,7 +260,8 @@ class Book extends MY_Controller {
 					'publisher' 	=> $this->input->post('publisher'),
 					'genre'			=> $this->input->post('genre'),
 					'text_price'	=> (float)$this->input->post('price'),
-					'paid_section'	=> $this->input->post('paid_section'),
+					'paid_section_start'	=> $this->input->post('paid_section_start'),
+					'paid_section_end'	=> $this->input->post('paid_section_end'),
 					'description'	=> $this->input->post('description'),
 					'mtime'			=> time()
 				);
@@ -224,18 +296,20 @@ class Book extends MY_Controller {
 					$this->image_lib->resize();
 
 					$insert_data['cover'] = date('Y/m/').$upload_data['file_name'];
+				} else {
+					$insert_data['covered'] = $this->input->post('covered');
 				}
 				
 				if($id > 0) {
 					$this->base->update_data('book', array('id'=>$id), $insert_data);
-					$this->msg->showmessage('修改完成', site_url('book/edit?step=1&id='.$id));
+					$this->msg->showmessage(lang('success'), site_url('book/edit?step=1&id='.$id));
 				} else {
 					$insert_data['uid'] 	= $uid;
 					$insert_data['ctime'] 	= time();
 
 					$id = $this->base->insert_data('book', $insert_data);
 
-					$this->msg->showmessage('BaseInfo完成', site_url('book/edit?step=2&id='.$id));
+					$this->msg->showmessage(lang('success'), site_url('book/edit?step=2&id='.$id));
 				}
 			} else if($setp == 2) {
 				if(!$id) $this->msg->showmessage('Add Book Fisrt！', site_url('book/edit'));
@@ -252,7 +326,17 @@ class Book extends MY_Controller {
 				}				
 			} else if($step == 2) {
 				if($id) {
-					$this->_data['chapters'] = $this->base->get_data('book_chapter', array('bid'=>$id), '*', 0, 0, 'dis ASC')->result_array();
+					$type = $this->input->get('type');
+
+					if($type == 'audio') {
+						$this->_data['audios'] = $this->base->get_data('book_audio', array('bid'=>$id), '*', 5, 0, 'id DESC')->result_array();
+					} else if ($type == 'text') {
+						$this->_data['chapters'] = $this->base->get_data('book_chapter', array('bid'=>$id), '*', 0, 0, 'dis ASC')->result_array();
+					} else {
+						$this->_data['chapters'] = $this->base->get_data('book_chapter', array('bid'=>$id), '*', 0, 0, 'dis ASC')->result_array();
+						$this->_data['pdf'] = $this->base->get_data('book_pdf', array('bid'=>$id), '*', 1, 0, 'ctime DESC')->row_array();
+					}
+					
 				} else {
 					$this->msg->showmessage('Add Book Fisrt！', site_url('book/edit'));
 				}
@@ -268,15 +352,53 @@ class Book extends MY_Controller {
 			$this->_data['id'] = $id;
 			$this->_data['step'] = $step;
 			$this->_data['active'] = 'edit';
-			
+			$this->_data['slider_left'] = $this->load->view(THEME.'/slider_left', $this->_data, true);
 			
 			$this->load->view(THEME.'/book_edit', $this->_data);
 		}
 	}
 	
 	public function chapter_edit () {
-		$bid = $this->input->get('bid');
-		$cid = $this->input->get('cid');
+		$bid = $this->_data['bid'] = intval($this->input->get('bid'));
+		$cid = intval($this->input->get_post('cid'));
+
+		if($_POST) {
+			$dis = intval($this->input->post('dis'));
+			$title = $this->input->post('title') ? $this->input->post('title') : 'Chapter '.$dis;
+			$content = $this->input->post('content');
+
+			if(!$bid) $this->msg->showmessage(lang('book_id_error'), site_url('book/chapter_edit?bid='.$bid));
+			if($dis <= 0) $this->msg->showmessage(lang('chapter_order_error'), site_url('book/chapter_edit?bid='.$bid));
+
+			$numr = $this->base->get_data('book_chapter', array('bid'=>$bid, 'dis'=>$dis))->num_rows();
+
+			if($numr > 0 && !$cid) $this->msg->showmessage(lang('chapter_sequence_exist'), site_url('book/chapter_edit?bid='.$bid));
+
+			$insert_data = array(
+				'dis' 		=> $dis,
+				'title'		=> $title,
+				'content'	=> $content,
+				'is_change'	=> 1,
+				'mtime'		=> time(),
+			);
+
+			if($cid) {
+				$this->base->update_data('book_chapter', array('id'=>$cid), $insert_data);
+				$this->msg->showmessage(lang('chapter_edit_ok')."\\0", '', 50, array("<embed allowScriptAccess=\"sameDomain\" src=\"".base_url('common/reader/SplitWord.swf?showSave=1&bookId='.$bid.'&chapterId='.$cid)."\" width=0 height=0 type=\"application/x-shockwave-flash\"></embed><script>function callback() {parent.callback();}</script>"));
+			} else {
+				$insert_data['ctime'] = time();
+				$insert_data['bid'] = $bid;
+				$cid = $this->base->insert_data('book_chapter', $insert_data);
+				$this->msg->showmessage(lang('chapter_creat_ok')."\\0", '', 1, array("<embed allowScriptAccess=\"sameDomain\" src=\"".base_url('common/reader/SplitWord.swf?showSave=1&bookId='.$bid.'&chapterId='.$cid)."\" width=0 height=0 type=\"application/x-shockwave-flash\"></embed><script>function callback() {parent.callback();}</script>"));
+			}
+		} else {
+			if($cid) {
+				$this->_data['chapter'] = $this->base->get_data('book_chapter', array('id'=>$cid))->row_array();
+			}
+			$this->load->view(THEME.'/header_sam');
+			$this->load->view(THEME.'/book_edit_box', $this->_data);
+			$this->load->view(THEME.'/footer_sam');			
+		}
 	}
 
 	public function chapter_add () {
@@ -285,12 +407,11 @@ class Book extends MY_Controller {
 		$title = $this->input->post('title');
 		$content = $this->input->post('content');
 
-		if(!$bid) $this->msg->showmessage('书本id错误', site_url('book/edit?step=2&id='.$bid));
-		if($dis <= 0) $this->msg->showmessage('章节排序错误', site_url('book/edit?step=2&id='.$bid));
-		if(!$title) $this->msg->showmessage('章节标题不能为空', site_url('book/edit?step=2&id='.$bid));
+		if(!$bid) $this->msg->showmessage(lang('book_id_error'), site_url('book/edit?step=2&id='.$bid));
+		if($dis <= 0) $this->msg->showmessage(lang('chapter_order_error'), site_url('book/edit?step=2&id='.$bid));
 
 		$numr = $this->base->get_data('book_chapter', array('bid'=>$bid, 'dis'=>$dis))->num_rows();
-		if($numr > 0) $this->msg->showmessage('章节排序已存在', site_url('book/edit?step=2&id='.$bid));
+		if($numr > 0) $this->msg->showmessage(lang('chapter_sequence_exist'), site_url('book/edit?step=2&id='.$bid));
 		// if(!$bid) output(1006, '书本id错误');	
 		// if($dis <= 0) output(2201, '章节排序错误');
 		// if(!$title) output(2202, '章节标题不能为空');
@@ -300,7 +421,7 @@ class Book extends MY_Controller {
 			'dis' 		=> $dis,
 			'title'		=> $title,
 			'content'	=> $content,
-			'is_change'	=> 0,
+			'is_change'	=> 1,
 			'ctime'		=> time(),
 			'mtime'		=> time(),
 		);
@@ -308,13 +429,148 @@ class Book extends MY_Controller {
 
 		if($cid = $this->base->insert_data('book_chapter', $insert_data)) {
 			//$this->run_change($bid, $cid);
-			$this->msg->showmessage("章节添加成功\\0", site_url('book/edit?step=2&id='.$bid), 1, array("<embed src=\"".base_url('common/splitWord.swf?showSave=1&bookId='.$bid.'&chapterId='.$cid)."\" width=0 height=0 type=\"application/x-shockwave-flash\"></embed>"));
+			$this->msg->showmessage(lang('chapter_creat_ok')."\\0", site_url('book/edit?step=2&id='.$bid), 1, array("<embed src=\"".base_url('common/reader/SplitWord.swf?showSave=1&bookId='.$bid.'&chapterId='.$cid)."\" width=0 height=0 type=\"application/x-shockwave-flash\"></embed>"));
 			//output(1, '章节添加成功');
 			//<embed src='".base_url('common/SplitWord.swf?bookId='.$bid.'&chapterId='.$cid),"' quality=high width=1 height=1 wmode=transparent type='application/x-shockwave-flash'></embed>
 		}
 	}
 
-	private function run_change($bid, $cid) {
-		echo "<embed src='".base_url('common/SplitWord.swf?bookId='.$bid.'&chapterId='.$cid),"' quality=high width=1 height=1 wmode=transparent type='application/x-shockwave-flash'></embed>";
+
+	//获取最新的章节号
+	public function getChapterNum() {
+		$bid = $this->input->get('bid');
+
+		$book = $this->base->get_data('book_chapter', array('bid'=>$bid), '*', 0, 0, 'dis DESC')->row_array();
+
+		if($book) {
+			echo isset($book['dis']) ? $book['dis'] : 1;
+		} else {
+			echo 1;
+		}
+	}
+
+	public function reading() {
+
+		$bid = intval($this->input->get('bid'));
+		if($bid) {
+			if(isset($this->member['uid'])) {
+				$num = $this->base->get_data('history', array('bid'=>$bid, 'uid'=>$this->member['uid']))->num_rows();
+				if($num > 0) {
+					$this->base->update_data('history', array('bid'=>$bid, 'uid'=>$this->member['uid']), array('mtime'=>time()));
+				} else {
+					$this->base->insert_data('history', array('bid'=>$bid, 'uid'=>$this->member['uid'], 'mtime'=>time()));
+				}
+
+				$this->db->query('UPDATE yos_book SET hits=hits+1 WHERE id='.$bid);
+				
+			}
+			redirect(base_url('common/reader/PageReader.swf?bookId='.$bid.'&ver='.$this->config->item('swfVer')));
+		} else {
+			$this->msg->showmessage(lang('failed'));
+		}
+	}
+
+	public function uploadPdf() {
+		$bid = $this->input->post('bid');
+
+		if($_FILES['userfile']['size'] > 0) {
+			
+			$dirname = './data/pdf/'.date('Y/m/');
+			$config = array(
+				'upload_path'	=> $dirname, 
+				'allowed_types'	=> 'pdf',
+				'encrypt_name'	=> true
+			);
+
+			createFolder($dirname);
+
+			$this->load->library('upload', $config);
+		 
+			if (!$this->upload->do_upload()) {
+				$error = $this->upload->display_errors();
+				$this->msg->showmessage($error);
+			}
+
+			$upload_data = $this->upload->data();
+
+			$insert_data = array(
+				'bid'		=> $bid,
+				'fileurl'	=> date('Y/m/').$upload_data['file_name'],
+				'filename'	=> $upload_data['orig_name'],
+				'filesize'	=> $upload_data['file_size'],
+				'ctime'		=> time()
+			);
+
+			$this->base->insert_data('book_pdf', $insert_data);
+		}
+
+		if($_POST['chapter']) {
+			foreach($_POST['chapter'] as $k=>$v) {
+				if(!$v['start_change']) $this->msg->showmessage(lang('start_error'), site_url('book/edit?step=2&&type=pdf&id='.$bid));
+				$update_data = array(
+					'dis'			=> intval($v['dis']),
+					'title'			=> $v['title'],
+					'start_change'	=> intval($v['start_change']),
+				);
+
+				$this->base->update_data('book_chapter' , array('id'=>$k), $update_data);
+			}
+		}	
+
+		if(isset($_POST['new']) && $_POST['new']) {
+			foreach($_POST['new'] as $k=>$v) {
+				if(!$v['start_change']) $this->msg->showmessage(lang('start_error'), site_url('book/edit?step=2&&type=pdf&id='.$bid));
+				$insert_data = array(
+					'bid'			=> $bid,
+					'dis'			=> intval($v['dis']),
+					'title'			=> $v['title'],
+					'start_change'	=> intval($v['start_change']),
+					'content'		=> '',
+				);
+
+				$this->base->insert_data('book_chapter' , $insert_data);
+			}			
+		}	
+
+		$this->msg->showmessage(lang('success'), site_url('book/edit?step=2&&type=pdf&id='.$bid));
+	}
+
+	//上传音频
+	public function uploadAudio() {
+		$bid = $this->input->post('bid');
+		if($_FILES['userfile']['size'] > 0) {
+			
+			$dirname = './data/audio/'.date('Y/m/');
+			$config = array(
+				'upload_path'	=> $dirname, 
+				'allowed_types'	=> 'mp3|wma|wav',
+				'encrypt_name'	=> true
+			);
+
+			createFolder($dirname);
+
+			$this->load->library('upload', $config);
+		 
+			if (!$this->upload->do_upload()) {
+				$error = $this->upload->display_errors();
+				$this->msg->showmessage($error);
+			}
+
+			$upload_data = $this->upload->data();
+
+
+
+			$insert_data = array(
+				'bid'		=> $bid,
+				'fileurl'	=> date('Y/m/').$upload_data['file_name'],
+				'filename'	=> $upload_data['orig_name'],
+				'filesize'	=> $upload_data['file_size'],
+				'ctime'		=> time()
+			);
+
+			$this->base->insert_data('book_audio', $insert_data);
+		}	
+
+		$this->msg->showmessage(lang('success'), site_url('book/edit?step=2&&type=audio&id='.$bid));	
 	}
 }
