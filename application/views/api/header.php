@@ -39,10 +39,52 @@
 					<a href="<?=site_url('api/book/views')?>#book_writeRviews">发表评论</a>
 				</div>		
 				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_getReviews">获取书本评论</a>
+				</div>		
+				<div class="childend">
 					<a href="<?=site_url('api/book/views')?>#book_getScoreInfo">获取书本评分情况</a>
 				</div>																	
 				<div class="childend">
 					<a href="<?=site_url('api/book/views')?>#book_getPageContent">获取单页内容</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_addFav">收藏书本</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_delFav">取消收藏</a>
+				</div>		
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_isFav">是否收藏过</a>
+				</div>																				
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_getMyReview">获取我对书本的评论</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_addNote">添加笔记</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_editNote">修改笔记</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_delNote">删除笔记</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_getNote">获取笔记列表</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_addBookmark">添加书签</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_delBookmark">删除书签</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_getBookmark">获取书签列表</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_isPayPage">判断此页是否需要付费</a>
+				</div>																	
+				<div class="childend">
+					<a href="<?=site_url('api/book/views')?>#book_payPage">支付单页</a>
 				</div>																	
 			</div>
 		</li>
@@ -53,8 +95,20 @@
 					<a href="<?=site_url('api/user/views')?>#user_login">登录</a>
 				</div>				
 				<div class="childend">
+					<a href="<?=site_url('api/user/views')?>#user_loginOut">退出登录</a>
+				</div>				
+				<div class="childend">
 					<a href="<?=site_url('api/user/views')?>#user_reg">注册</a>
 				</div>
+				<div class="childend">
+					<a href="<?=site_url('api/user/views')?>#user_editInfo">修改用户信息</a>
+				</div>
+				<div class="childend">
+					<a href="<?=site_url('api/user/views')?>#user_facebookLogin">facebook登陆</a>
+				</div>
+				<div class="childend">
+					<a href="<?=site_url('api/user/views')?>#user_getUserInfo">获取用户登陆信息</a>
+				</div>				
 			</div>
 		</li>		
 	</ul>
