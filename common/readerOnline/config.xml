@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="gb2312"?> 
+<menu>
+	<item prop="crossdomain">http://yos.childroad.cn/crossdomain.xml</item>
+	<item prop="BaseSite">http://yos.childroad.cn</item>
+	<item prop="getDirectory">http://yos.childroad.cn/index.php/api/book/getDirectory</item>
+	<item prop="getPageContent">http://yos.childroad.cn/index.php/api/book/getPageContent</item>
+	<item prop="designUrl">http://design.exacloud.cn/scenerenderprod/designs/</item>
+	<item prop="singleDesignUrl">http://design.exacloud.cn/scenerenderprod/designrooms/</item>
+	<item prop="singleSaveDesignUrl">http://design.exacloud.cn/scenerenderprod/designrooms/</item>
+	<item prop="renderRoomUrl">http://design.exacloud.cn/scenerenderprod/render?</item>
+	<item prop="asyncRenderUrl">http://design.exacloud.cn/scenerenderprod/asyncrender?</item>
+	<item prop="getAsyncStatus">http://design.exacloud.cn/scenerenderprod/asyncstatus?</item>
+	<item prop="getSnapshots">http://design.exacloud.cn/scenerenderprod/snapshots?</item>
+	<item prop="getSnapshotById">http://design.exacloud.cn/scenerenderprod/snapshots/</item>
+</menu>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="gb2312"?> 
+<menu>
+	<item prop="crossdomain">http://www.youshelf.com/crossdomain.xml</item>
+	<item prop="BaseSite">http://www.youshelf.com</item>
+	<item prop="getDirectory">http://www.youshelf.com/api/book/getDirectory</item>
+	<item prop="getPageContent">http://www.youshelf.com/api/book/getPageContent</item>
+	<item prop="addFav">http://www.youshelf.com/api/book/addFav</item>
+	<item prop="delFav">http://www.youshelf.com/api/book/delFav</item>
+	<item prop="getMyReview">http://www.youshelf.com/api/book/getMyReview</item>
+	<item prop="writeRviews">http://www.youshelf.com/api/book/writeRviews</item>
+	<item prop="getScoreInfo">http://www.youshelf.com/api/book/getScoreInfo</item>
+	<item prop="addBookmark">http://www.youshelf.com/api/book/addBookmark</item>
+	<item prop="delBookmark">http://www.youshelf.com/api/book/delBookmark</item>
+	<item prop="getBookmark">http://www.youshelf.com/api/book/getBookmark</item>
+	<item prop="addNote">http://www.youshelf.com/api/book/addNote</item>
+	<item prop="delNote">http://www.youshelf.com/api/book/delNote</item>
+	<item prop="editNote">http://www.youshelf.com/api/book/editNote</item>
+	<item prop="getNote">http://www.youshelf.com/api/book/getNote</item>
+	<item prop="isPayPage">http://www.youshelf.com/api/book/isPayPage</item>
+	<item prop="payPage">http://www.youshelf.com/api/book/payPage</item>
+	<item prop="getBookInfo">http://www.youshelf.com/api/book/getBookInfo</item>
+	<item prop="login">http://www.youshelf.com/api/user/login</item>
+	<item prop="loginOut">http://www.youshelf.com/api/user/loginOut</item>
+	<item prop="getUserInfo">http://www.youshelf.com/api/user/getUserInfo</item>
+	<item prop="isFav">http://www.youshelf.com/api/book/isFav</item>
+	<item prop="getFarPage">http://www.youshelf.com/api/book/getFarPage</item>
+	<item prop="fonts">Garamond,Gurmukhi MN,Kannada MN,Optima,Papyrus,Telugu MN,Malgun Gothic,Meiryo,Meiryo UI,Nyala,Palatino Linotype,Apple Chancery,Adobe Garamond Pro,Bookman Old Style,Calibri,Calibri Light,Candara,Catriel,Century,Century Gothic,Chaparral Pro,Constantia,Corbel,Euphemia,Cochin,Corbel,Footlight MT Light,Gill Sans,Gill Sans MT,Garamond,Goudy Old Style,Gujarati Sangam MN,InaiMathi,Iowan Old Style,Kokonor,Libian SC,Lucida Calligraphy,Monotype Corsiva,Nanum Pen Script,Perpetua,PilGi,PMingLiU,PT Serif,Seravek,Gautami,Gisha,Huxtable,Kalinga,Khmer UI,Lao UI,Levenim MT,Manga,Microsoft New Tai Lue,Monotype Corsiva,Myriad Web,Papyrus,Plantagenet Cherokee,Raavi,Segoe Print,Segoe UI,Segoe UI Semibold,Shruti,Sylfaen,Tahoma,Teen,Tekton Pro,Times New Roman,Traditional Arabic,Trebuchet MS,Vani,Yuppy SC</item>
+</menu>
